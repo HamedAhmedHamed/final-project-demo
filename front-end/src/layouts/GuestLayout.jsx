@@ -1,5 +1,6 @@
-import ContactBar from "../components/ContactBar";
-import NavBar from "../components/NavBar";
+import ContactBar from "../components/header/ContactBar";
+import NavBar from "../components/header/NavBar";
+import Footer from "../components/footer/Footer"
 import { Outlet } from "react-router-dom";
 
 const GuestLayout = () => {
@@ -11,6 +12,8 @@ const GuestLayout = () => {
       </header>
 
       <Outlet />
+
+      <Footer />
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import logo from "../assets/logo/japanese-food.svg"
+import logo from "../../assets/logo/japanese-food.svg"
 
 const NavBar = () => {
   return (
