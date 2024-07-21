@@ -9,25 +9,25 @@ const MenuInfoSection = () => {
 	const menuInfos = [
 		{
 			title: "Breakfast",
-			icon: <TbMug size={50} />,
+			icon: <TbMug size={50} className="text-gray-700" />,
 			children: "In the new era of technology we look in the future with certainty and pride for our life."
 		},
 
 		{
 			title: "Main Dishes",
-			icon: <BiBowlRice size={50} />,
+			icon: <BiBowlRice size={50} className="text-gray-700" />,
 			children: "In the new era of technology we look in the future with certainty and pride for our life."
 		},
 
 		{
 			title: "Drinks",
-			icon: <RiDrinks2Line size={50} />,
+			icon: <RiDrinks2Line size={50} className="text-gray-700" />,
 			children: "In the new era of technology we look in the future with certainty and pride for our life."
 		},
 
 		{
 			title: "Desserts",
-			icon: <LuCakeSlice size={50} />,
+			icon: <LuCakeSlice size={50}className="text-gray-700" />,
 			children: "In the new era of technology we look in the future with certainty and pride for our life."
 		}
 	]
@@ -35,7 +35,7 @@ const MenuInfoSection = () => {
 	return (
 		<section className="flex justify-center items-center px-16 py-20 w-full bg-white max-md:px-5 max-md:max-w-full">
       		<div className="flex flex-col mt-3 mb-4 w-full max-w-[1296px] max-md:max-w-full">
-        		<h2 className="justify-center self-center text-6xl font-medium text-center leading-[60.5px] text-stone-800 max-md:max-w-full max-md:text-4xl">
+        		<h2 className="font-playfair justify-center self-center text-6xl font-medium text-center leading-[60.5px] text-stone-800 max-md:max-w-full max-md:text-4xl">
           			Browse Our Menu
         		</h2>
         		<div className="mt-16 max-md:mt-10 max-md:max-w-full">

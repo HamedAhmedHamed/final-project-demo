@@ -40,7 +40,7 @@ const NavBar = () => {
       </ul>
 
       <NavLink
-        className="justify-center capitalize self-stretch px-6 py-3 my-auto font-bold text-right text-gray-900 hover:text-red-800 border-2 border-solid border-stone-800 hover:border-red-800 rounded-[118px] max-md:px-5"
+        className="justify-center capitalize self-stretch px-6 py-3 my-auto font-bold text-right text-gray-900 hover:text-rose-700 border-2 border-solid border-stone-800 hover:border-rose-700 duration-100 rounded-[118px] max-md:px-5"
         to="/login"
       >
         login

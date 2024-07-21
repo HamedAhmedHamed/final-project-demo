@@ -13,7 +13,9 @@ const GuestLayout = () => {
 
       <Outlet />
 
-      <Footer />
+		  <footer className="flex justify-center items-center px-16 py-20 w-full bg-zinc-700 max-md:px-5 max-md:max-w-full">
+        <Footer />
+      </footer>
     </>
   )
 }

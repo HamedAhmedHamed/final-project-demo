@@ -1,8 +1,12 @@
-import React from 'react'
+import AboutSection from "../components/sections/AboutSection"
+import BenefitsSection from "../components/sections/BenefitsSection"
 
 const About = () => {
   return (
-    <div>About</div>
+    <main>
+      <AboutSection callToActionBtn={false} />
+      <BenefitsSection />
+    </main>
   )
 }
 
