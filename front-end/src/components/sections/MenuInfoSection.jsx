@@ -35,8 +35,8 @@ const MenuInfoSection = () => {
 	return (
 		<section className="flex justify-center items-center px-16 py-20 w-full bg-white max-md:px-5 max-md:max-w-full">
       		<div className="flex flex-col mt-3 mb-4 w-full max-w-[1296px] max-md:max-w-full">
-        		<h2 className="font-playfair justify-center self-center text-6xl font-medium text-center leading-[60.5px] text-stone-800 max-md:max-w-full max-md:text-4xl">
-          			Browse Our Menu
+        		<h2 className="font-playfair capitalize justify-center self-center text-6xl font-medium text-center leading-[60.5px] text-stone-800 max-md:max-w-full max-md:text-4xl">
+          			browse our menu
         		</h2>
         		<div className="mt-16 max-md:mt-10 max-md:max-w-full">
           			<div className="flex gap-5 max-md:flex-col max-md:gap-0">

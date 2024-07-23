@@ -4,7 +4,7 @@ import Footer from "../components/footer/Footer"
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-const GuestLayout = () => {
+const AdminLayout = () => {
   const location = useLocation()
 
   useEffect(() => {
@@ -27,4 +27,4 @@ const GuestLayout = () => {
   )
 }
 
-export default GuestLayout
+export default AdminLayout

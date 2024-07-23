@@ -2,6 +2,11 @@ import { Link } from "react-router-dom"
 import bg from "../../assets/hero/bg.jpg"
 
 const HomeHero = () => {
+
+  const navigateToBooking = () => {
+
+  }
+
   return (
     <section className="flex overflow-hidden relative flex-col justify-center items-center px-16 py-20 w-full min-h-[802px] max-md:px-5 max-md:max-w-full">
 
@@ -29,13 +34,16 @@ const HomeHero = () => {
         </div>
         <div className="flex gap-4 self-center mt-10 text-base font-bold leading-6 text-right">
 
-        <button className="capitalize justify-center px-8 py-5 text-white bg-rose-700 border-2 border-rose-700 border-solid rounded-[118px] hover:bg-transparent hover:text-rose-700 duration-75 max-md:px-5">
+          <button className="capitalize justify-center px-8 py-5 text-white bg-rose-700 border-2 border-rose-700 border-solid rounded-[118px] hover:bg-transparent hover:text-rose-700 duration-75 max-md:px-5">
             book a table
           </button>
 
-          <button className="capitalize justify-center px-8 py-5 text-gray-900 bg-transparent border-2 border-solid border-stone-800 rounded-[118px] max-md:px-5">
+          <Link
+            to="/menu"
+            className="capitalize justify-center px-8 py-5 text-gray-900 bg-transparent border-2 border-solid border-stone-800 rounded-[118px] max-md:px-5"
+          >
             explore menu
-          </button>
+          </Link>
         </div>
       </div>
 

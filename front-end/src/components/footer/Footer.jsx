@@ -95,11 +95,6 @@ const Footer = () => {
 											login
 										</Link>
 									</li>
-									{/* <div>Home</div>
-									<div className="mt-5">About</div>
-									<div className="mt-5">Menu</div>
-									<div className="mt-5">Register</div>
-									<div className="mt-5">Login</div> */}
 								</ul>
 
 							</div>
@@ -108,8 +103,8 @@ const Footer = () => {
 
 					<div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
 						<div className="flex flex-col grow max-md:mt-10">
-							<div className="text-base font-bold leading-6 text-white">
-								Follow Us On Instagram
+							<div className="text-base capitalize font-bold leading-6 text-white">
+								follow us on instagram
 							</div>
 							<div className="mt-10">
 								<div className="flex gap-5 max-md:flex-col max-md:gap-0">
