@@ -1,8 +1,15 @@
-import React from 'react'
+import LoginForm from "../components/sections/LoginForm"
+import bg from "../assets/booking/Map.png"
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <main>
+      <LoginForm />
+      <img
+        src={bg}
+        alt=""
+      />
+    </main>
   )
 }
 

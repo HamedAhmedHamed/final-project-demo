@@ -1,9 +1,14 @@
-import React from 'react'
+import BookingForm from "../components/sections/BookingForm"
+import mapBg from "../assets/booking/Map.png"
 
 const Booking = () => {
   return (
     <main>
-      booking
+      <BookingForm />
+       <img
+        loading="lazy"
+        src={mapBg}
+      />
     </main>
   )
 }

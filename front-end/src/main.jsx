@@ -12,21 +12,25 @@ import About from './routes/About.jsx'
 import Menu from './routes/Menu.jsx'
 import NotFound from './routes/NotFound.jsx'
 import Booking from './routes/Booking.jsx'
+import Login from './routes/Login.jsx'
+import Register from './routes/Register.jsx'
+import MyBookings from './routes/MyBookings.jsx'
+import UserProfile from './routes/UserProfile.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <GuestLayout />,
-    errorElement: <Navigate to="/not-found" />,
+    // errorElement: <Navigate to="/not-found" />,
     children: [
       {
         index: true,
         element: <Navigate to="/home" replace />
       },
-      {
-        path: "/not-found",
-        element: <NotFound />
-      },
+      // {
+      //   path: "/not-found",
+      //   element: <NotFound />
+      // },
       {
         path: "/home",
         element: <Home />,
@@ -38,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "/menu",
         element: <Menu />
+      },
+      {
+        path: "/register",
+        element: <Register />
+      },
+      {
+        path: "/login",
+        element: <Login />
       }
     ]
   },
@@ -49,6 +61,14 @@ const router = createBrowserRouter([
       {
         path: "/book-a-table",
         element: <Booking />
+      },
+      {
+        path: "/my-bookings",
+        element: <MyBookings />
+      },
+      {
+        path: "/profile",
+        element: <UserProfile />
       }
     ]
   },

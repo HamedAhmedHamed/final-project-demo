@@ -3,14 +3,14 @@ import logo from "../../assets/logo/japanese-food.svg"
 
 const NavBar = () => {
   return (
-    <nav className="flex gap-5 justify-between items-center self-center px-5 my-7 w-full text-base leading-6 max-w-[1293px] max-md:flex-wrap max-md:max-w-full">
+    <nav className="flex gap-5 justify-between items-center self-center px-5 my-7 w-full text-base leading-6 max-w-screen-xl max-sm:flex-col max-md:max-w-full">
 
       <span className="flex justify-center items-center gap-1">
         <img src={logo} className="" alt="logo" />
         <h2 className="font-playfair italic font-bold text-3xl text-stone-700">Bistro Bliss</h2>
       </span>
 
-      <ul className="flex gap-2 self-stretch my-auto font-medium whitespace-nowrap text-stone-800 max-md:flex-wrap">
+      <ul className="flex gap-2 self-stretch my-auto font-medium whitespace-nowrap text-stone-800 max-sm:justify-evenly">
         <li>
           <NavLink
             to="/home"
@@ -53,7 +53,7 @@ const NavBar = () => {
 
       <NavLink
         to="/login"
-        className="justify-center capitalize self-stretch px-6 py-3 my-auto font-bold text-right text-gray-900 hover:text-rose-700 border-2 border-solid border-stone-800 hover:border-rose-700 duration-100 rounded-[118px] max-md:px-5"
+        className="justify-center capitalize px-6 py-3 my-auto font-bold text-right text-gray-900 hover:text-rose-700 border-2 border-solid border-stone-800 hover:border-rose-700 duration-100 rounded-full max-md:px-5 max-sm:justify-end"
       >
         login
       </NavLink>
