@@ -1,8 +1,20 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { BeatLoader } from "react-spinners"
+import useAuthContext from "../../context/AuthContext"
 
 const LoginForm = () => {
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  })
+
+  const { errors, isLoading, login, isAdmin, setIsAdmin } = useAuthContext()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    login(user)
+  }
 
   return (
     <section className="flex z-10 flex-col items-center px-5 w-full bg-stone-50 max-md:max-w-full">
@@ -11,7 +23,10 @@ const LoginForm = () => {
         login as, <span className="text-8xl text-rose-700">{ isAdmin ? "admin" : "user"}</span>
       </h1>
 
-      <form className="flex z-10 flex-col gap-5 text-stone-800 px-12 py-12 mt-20 -mb-60 max-w-full text-base leading-6 bg-white rounded-2xl border border-white border-solid shadow-2xl w-[812px] max-md:px-5 max-md:mt-10 max-md:mb-2.5">
+      <form
+        onSubmit={handleSubmit}
+        className="flex z-10 flex-col gap-5 text-stone-800 px-12 py-12 mt-20 -mb-60 max-w-full text-base leading-6 bg-white rounded-2xl border border-white border-solid shadow-2xl w-[812px] max-md:px-5 max-md:mt-10 max-md:mb-2.5"
+      >
 
         <div className="flex flex-col w-full max-md:w-full">
           <label htmlFor="email" className='capitalize font-bold'>email</label>
@@ -19,6 +34,9 @@ const LoginForm = () => {
             id='email'
             type="email"
             required
+            disabled={isLoading ? true : false}
+            value={user.email}
+            onChange={(e) => setUser(() => ({ ...user, email: e.target.value}))}
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
           />
         </div>
@@ -29,6 +47,9 @@ const LoginForm = () => {
             id="password"
             type="password"
             required
+            disabled={isLoading ? true : false}
+            value={user.password}
+            onChange={(e) => setUser(() => ({ ...user, password: e.target.value }))}
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
           />
         </div>
@@ -37,7 +58,9 @@ const LoginForm = () => {
           type="submit"
           className="px-8 py-5 mt-6 font-bold text-center capitalize text-white bg-rose-700 rounded-[118px] max-md:px-5 max-md:max-w-full"
         >
-          login
+          {isLoading
+            ? <BeatLoader color="snow" />
+            : "login"}
         </button>
 
         <div className="flex justify-between items-center w-full">

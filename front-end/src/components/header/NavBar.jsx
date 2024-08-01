@@ -1,7 +1,20 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
+import useAuthContext from "../../context/AuthContext"
 import logo from "../../assets/logo/japanese-food.svg"
 
 const NavBar = () => {
+  const { user, logout } = useAuthContext()
+  const navigate = useNavigate()
+
+  const handleLogin = () => {
+    if (user) {
+      logout()
+    } else {
+      navigate("/login")
+    }
+  }
+    // user ? () => logout() : <Navigate to="/login" />
+
   return (
     <nav className="flex gap-5 justify-between items-center self-center px-5 my-7 w-full text-base leading-6 max-w-screen-xl max-sm:flex-col max-md:max-w-full">
 
@@ -51,12 +64,14 @@ const NavBar = () => {
         </li>
       </ul>
 
-      <NavLink
-        to="/login"
+      <button
+        onClick={handleLogin}
         className="justify-center capitalize px-6 py-3 my-auto font-bold text-right text-gray-900 hover:text-rose-700 border-2 border-solid border-stone-800 hover:border-rose-700 duration-100 rounded-full max-md:px-5 max-sm:justify-end"
       >
-        login
-      </NavLink>
+        {user
+          ? "logout"
+          : "login"} 
+      </button>
     </nav>
   )
 }
