@@ -21,16 +21,23 @@ export const AuthProvider = ({ children }) => {
         Authorization: `Bearer ${token}`
       }
     })
+    // DEBUG
+    console.log(data)
 
     setUser(data)
   }
 
   const login = async ({ ...credentials }) => {
-    await csrf()
     setIsLoading(true)
+    await csrf()
     try {
       const { data } = await api.post("/login", credentials)
       localStorage.setItem("access-token", data.token)
+      if (data.role === "admin")
+        setIsAdmin(() => true)
+      else
+        setIsAdmin(() => false)
+      setErrors([])
       getUser()
       navigate("/profile")
     } catch (error) {
@@ -42,13 +49,17 @@ export const AuthProvider = ({ children }) => {
   }
 
   const register = async ({ ...credentials }) => {
-    await csrf()
     setIsLoading(true)
+    await csrf()
     try {
-      await api.post("/register", credentials)
+      const res = await api.post("/register", credentials)
+      // DEBUG
+      console.log(res)
       getUser()
+      setErrors([])
       navigate("/profile")
     } catch (error) {
+      console.log(error)
       if (error.response.status === 422)
         setErrors(error.response.data.errors)
     } finally {
@@ -57,18 +68,20 @@ export const AuthProvider = ({ children }) => {
   }
 
   const logout = async () => {
+    setIsLoading(true)
     const token = localStorage.getItem("access-token")
     await csrf()
-    setIsLoading(true)
     try {
       await api.post("/logout", {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      navigate("/login")
       setUser(null)
+      setIsAdmin(false)
+      navigate("/login")
     } catch (error) {
+      // DEBUG
       console.log(error)
     } finally {
       setIsLoading(false)

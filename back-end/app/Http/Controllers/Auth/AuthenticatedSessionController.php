@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
@@ -24,14 +25,15 @@ class AuthenticatedSessionController extends Controller
                     ->plainTextToken;
 
         return response()->json([
-            'token' => $token
+            'token' => $token,
+            'role' => Auth::user()->role
         ]);
     }
 
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): Response
+    public function destroy(Request $request): HttpResponse
     {
         Auth::guard('web')->logout();
 

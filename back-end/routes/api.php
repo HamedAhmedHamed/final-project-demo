@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::get('/menu', [MenuController::class, 'index']);
+
+Route::middleware(['auth:sanctum', 'role:user'])->group(function ()
+{
+
+});
+
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function ()
+{
+
+});

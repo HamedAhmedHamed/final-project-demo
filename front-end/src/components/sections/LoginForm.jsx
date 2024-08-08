@@ -9,7 +9,7 @@ const LoginForm = () => {
     password: ""
   })
 
-  const { errors, isLoading, login, isAdmin, setIsAdmin } = useAuthContext()
+  const { errors, isLoading, login, isAdmin } = useAuthContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -19,8 +19,8 @@ const LoginForm = () => {
   return (
     <section className="flex z-10 flex-col items-center px-5 w-full bg-stone-50 max-md:max-w-full">
 
-      <h1 className="mt-20 capitalize font-playfair text-7xl text-center leading-[96px] text-stone-800 max-md:mt-10 max-md:max-w-full max-md:text-4xl">
-        login as, <span className="text-8xl text-rose-700">{ isAdmin ? "admin" : "user"}</span>
+      <h1 className="mt-20 capitalize font-playfair text-8xl text-rose-700 text-center leading-[96px] max-md:mt-10 max-md:max-w-full max-md:text-4xl">
+        login
       </h1>
 
       <form
@@ -66,7 +66,7 @@ const LoginForm = () => {
         <div className="flex justify-between items-center w-full">
           <Link to="/register" className="px-3 py-2 bg-gray-50 rounded-full hover:bg-gray-100 hover:text-rose-700 duration-100">Don't have an accout? Register instead</Link>
 
-          <div className="px-3 py-2 flex justify-between items-center">
+          {/* <div className="px-3 py-2 flex justify-between items-center">
             <input
               id="checkAdmin"
               type="checkbox"
@@ -75,7 +75,7 @@ const LoginForm = () => {
               className="p-2 w-4 h-4"
             />
             <label htmlFor="checkAdmin" className="ml-1 p-2">Login as Admin</label>
-          </div>
+          </div> */}
         </div>
 
       </form>
