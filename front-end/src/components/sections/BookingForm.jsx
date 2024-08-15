@@ -50,7 +50,7 @@ const BookingForm = () => {
 
         <div className="flex gap-5 justify-between text-stone-800 mt-6 max-md:flex-wrap">
 
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col w-1/2 max-md:w-full">
             <label htmlFor="name" className="capitalize font-bold">name</label>
 
             <input
@@ -64,7 +64,7 @@ const BookingForm = () => {
             />
           </div>
 
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col w-1/2 max-md:w-full">
             <label htmlFor="phone" className="font-bold">phone</label>
 
             <input

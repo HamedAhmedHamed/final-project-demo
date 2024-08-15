@@ -1,17 +1,24 @@
 import { Routes, Route } from 'react-router-dom'
+
 import GuestLayout from './layouts/GuestLayout.jsx'
 import UserLayout from './layouts/UserLayout.jsx'
 import AdminLayout from './layouts/GuestLayout.jsx'
 
+import NotFound from './routes/NotFound.jsx'
+
 import Home from './routes/Home.jsx'
 import About from './routes/About.jsx'
 import Menu from './routes/Menu.jsx'
-import NotFound from './routes/NotFound.jsx'
-import Booking from './routes/Booking.jsx'
 import Login from './routes/Login.jsx'
 import Register from './routes/Register.jsx'
+
+import Booking from './routes/Booking.jsx'
 import MyBookings from './routes/MyBookings.jsx'
 import UserProfile from './routes/UserProfile.jsx'
+
+import AdminPanel from './routes/AdminPanel.jsx'
+import ReviewBookings from './routes/ReviewBookings.jsx'
+import ModifyMenu from './routes/ModifyMenu.jsx'
 
 import './index.css'
 
@@ -33,7 +40,9 @@ const App = () => {
       </Route>
 
       <Route element={<AdminLayout />}>
-
+        <Route path='/admin-panel' element={<AdminPanel />} />
+        <Route path='/modify-menu' element={<ModifyMenu />} />
+        <Route path='/review-bookings' element={<ReviewBookings />} />
       </Route>
     </Routes>
   )

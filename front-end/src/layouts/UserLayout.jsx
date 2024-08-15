@@ -1,16 +1,23 @@
+import { useEffect } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import useAuthContext from "../context/AuthContext";
 import ContactBar from "../components/header/ContactBar";
 import NavBar from "../components/header/NavBar";
 import Footer from "../components/footer/Footer"
-import { Outlet, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 const UserLayout = () => {
   const location = useLocation()
+  const { user, getUser } = useAuthContext()
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [location])
 
+  // useEffect(() => {
+  //   if (!user) {
+  //     getUser()
+  //   }
+  // }, [user])
   return (
     <>
       <header className="flex flex-col w-full max-md:max-w-full">
@@ -20,7 +27,7 @@ const UserLayout = () => {
 
       <Outlet />
 
-		  <footer className="flex justify-center items-center px-16 py-20 w-full bg-zinc-700 max-md:px-5 max-md:max-w-full">
+      <footer className="flex justify-center items-center px-16 py-20 w-full bg-zinc-700 max-md:px-5 max-md:max-w-full">
         <Footer />
       </footer>
     </>

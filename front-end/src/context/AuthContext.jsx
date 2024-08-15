@@ -5,27 +5,43 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [user, setUser]           = useState(null)
+  // const [isAdmin, setIsAdmin]     = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [errors, setErrors] = useState([])
-  const navigate = useNavigate()
+  const [errors, setErrors]       = useState({})
+  const navigate                  = useNavigate()
 
   const csrf = () => api.get("/sanctum/csrf-cookie")
-
+  
+  // const validateRole = ({ data }) => {
+  //   switch (data?.role) {
+  //     case "admin":
+  //       setIsAdmin(() => true) 
+  //       break;
+  //     case "user":
+  //       setIsAdmin(() => false)
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
+  
   const getUser = async () => {
     const token = localStorage.getItem("access-token")
 
-    const { data } = await api.get("/api/user", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    // DEBUG
-    console.log(data)
-
-    setUser(data)
+    try {
+      const { data } = await api.get("/api/user", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      // validateRole(data) 
+      setUser(() => data)
+    } catch (error) {
+      console.log(error) 
+    }
   }
+
 
   const login = async ({ ...credentials }) => {
     setIsLoading(true)
@@ -33,13 +49,13 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await api.post("/login", credentials)
       localStorage.setItem("access-token", data.token)
-      if (data.role === "admin")
-        setIsAdmin(() => true)
+      // validateRole(data) 
+      setErrors({})
+      await getUser()
+      if (data.role === "user")
+        navigate("/profile")
       else
-        setIsAdmin(() => false)
-      setErrors([])
-      getUser()
-      navigate("/profile")
+        navigate("/admin-panel")
     } catch (error) {
       if (error.response.status === 422)
         setErrors(error.response.data.errors)
@@ -52,14 +68,16 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true)
     await csrf()
     try {
-      const res = await api.post("/register", credentials)
-      // DEBUG
-      console.log(res)
-      getUser()
-      setErrors([])
-      navigate("/profile")
+      const { data } = await api.post("/register", credentials)
+      localStorage.setItem("access-token", data.token)
+      // validateRole(data)
+      setErrors({})
+      await getUser()
+      if (data.role === "user")
+        navigate("/profile")
+      else
+        navigate("/admin-panel")
     } catch (error) {
-      console.log(error)
       if (error.response.status === 422)
         setErrors(error.response.data.errors)
     } finally {
@@ -78,7 +96,7 @@ export const AuthProvider = ({ children }) => {
         }
       })
       setUser(null)
-      setIsAdmin(false)
+      // setIsAdmin(false)
       navigate("/login")
     } catch (error) {
       // DEBUG
@@ -91,7 +109,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        user, errors, isLoading, getUser, isAdmin, setIsAdmin, login, register, logout
+        user, errors, isLoading, getUser, login, register, logout
       }}
     >
       {children}
