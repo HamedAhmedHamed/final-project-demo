@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react"
 
 const Footer = () => {
-	const [date, setDate] = useState(null)
+	const [date, setDate] = useState<number | null>(null)
 
 	useEffect(() => {
 		setDate(() => new Date().getFullYear())
@@ -23,7 +23,9 @@ const Footer = () => {
 						<div className="flex flex-col max-md:mt-10">
 							<div className="flex gap-3.5 text-4xl font-semibold tracking-tight leading-7 text-white">
 								<img
+									loading="eager"
 									src={logo}
+									alt="logo"
 								/>
 								<div className="capitalize font-playfair justify-center my-auto italic">
 									bistro bliss
@@ -111,15 +113,17 @@ const Footer = () => {
 								<div className="flex gap-5 max-md:flex-col max-md:gap-0">
 									<div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
 										<img
-											loading="lazy"
+											loading="eager"
 											src={eggs}
+											alt="eggs"
 											className="grow shrink-0 max-w-full aspect-[1.14] w-[194px] max-md:mt-4"
 										/>
 									</div>
 									<div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
 										<img
-											loading="lazy"
+											loading="eager"
 											src={chips}
+											alt="chips"
 											className="grow shrink-0 max-w-full aspect-[1.14] w-[194px] max-md:mt-4"
 										/>
 									</div>
@@ -129,15 +133,17 @@ const Footer = () => {
 								<div className="flex gap-5 max-md:flex-col max-md:gap-0">
 									<div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
 										<img
-											loading="lazy"
+											loading="eager"
 											src={salad}
+											alt="salad"
 											className="grow shrink-0 max-w-full aspect-[1.14] w-[194px] max-md:mt-4"
 										/>
 									</div>
 									<div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
 										<img
-											loading="lazy"
+											loading="eager"
 											src={pancake}
+											alt="pancake"
 											className="grow shrink-0 max-w-full aspect-[1.14] w-[194px] max-md:mt-4"
 										/>
 									</div>

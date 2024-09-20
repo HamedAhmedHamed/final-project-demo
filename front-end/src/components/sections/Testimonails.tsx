@@ -1,4 +1,4 @@
-import TestimonialCard from "./TestimonialCard"
+import TestimonialCard from "./TestimonialCard.tsx"
 
 import sohpie from "/testimonials/sophire.webp"
 import matt from "/testimonials/matt.webp"

@@ -7,7 +7,8 @@ const Register = () => {
       <RegisterForm />
       <img
         src={bg}
-        alt=""
+        loading="eager"
+        alt="background"
       />
     </main>
   )

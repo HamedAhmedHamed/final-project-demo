@@ -11,8 +11,9 @@ const HomeHero = () => {
     <section className="flex overflow-hidden relative flex-col justify-center items-center px-16 py-20 w-full min-h-[802px] max-sm:px-2 max-sm:py-0 max-md:px-5 max-md:max-w-full">
 
       <img
-        loading="lazy"
+        loading="eager"
         src={bg}
+        alt="hero"
         className="object-cover absolute inset-0 size-full"
       />
 

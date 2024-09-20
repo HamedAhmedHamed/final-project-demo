@@ -7,7 +7,7 @@ const Login = () => {
       <LoginForm />
       <img
         src={bg}
-        alt=""
+        alt="map background"
       />
     </main>
   )

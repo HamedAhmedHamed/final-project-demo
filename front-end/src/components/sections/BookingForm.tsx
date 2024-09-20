@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 const BookingForm = () => {
-  const [currentDate, setCurrentDate] = useState(null)
+  const [currentDate, setCurrentDate] = useState<string | null>(null)
 
   useEffect(() => {
     setCurrentDate(() => new Date().toISOString().substring(0, 10))

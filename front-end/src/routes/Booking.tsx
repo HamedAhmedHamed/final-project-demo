@@ -6,8 +6,9 @@ const Booking = () => {
     <main>
       <BookingForm />
        <img
-        loading="lazy"
+        loading="eager"
         src={mapBg}
+        alt="map background"
       />
     </main>
   )

@@ -4,7 +4,7 @@ import grubHub from "/brands/grubhub.webp"
 import justEat from "/brands/just-eat.webp"
 import foodPanda from "/brands/food-panda.webp"
 import doorDash from "/brands/door-dash.webp"
-import deliveroo from "/brands/delivergoo.webp"
+import delivergoo from "/brands/delivergoo.webp"
 import instaCart from "/brands/insta-cart.webp"
 import didiFood from "/brands/didi-foods.webp"
 
@@ -35,8 +35,9 @@ const Brands = () => {
                 <div className="flex flex-col justify-center">
                   <div className="flex justify-center items-center px-9 py-8 bg-white rounded-xl border border-solid shadow-2xl border-stone-50 max-md:px-5">
                     <img
-                      loading="lazy"
+                      loading="eager"
                       src={uberEats}
+                      alt="ubereats"
                     />
                   </div>
                 </div>
@@ -44,8 +45,9 @@ const Brands = () => {
                 <div className="flex flex-col justify-center">
                   <div className="flex justify-center items-center px-12 py-8 bg-white rounded-xl border border-solid shadow-2xl border-stone-50 max-md:px-5">
                     <img
-                      loading="lazy"
+                      loading="eager"
                       src={grubHub}
+                      alt="grubhub"
                     />
                   </div>
                 </div>
@@ -53,8 +55,9 @@ const Brands = () => {
                 <div className="flex flex-col justify-center">
                   <div className="flex justify-center items-center px-9 py-8 bg-white rounded-xl border border-solid shadow-2xl border-stone-50 max-md:px-5">
                     <img
-                      loading="lazy"
+                      loading="eager"
                       src={postMates}
+                      alt="postmates"
                     />
                   </div>
                 </div>
@@ -66,8 +69,9 @@ const Brands = () => {
                 <div className="flex flex-col justify-center">
                   <div className="flex justify-center items-center px-9 py-8 bg-white rounded-xl border border-solid shadow-2xl border-stone-50 max-md:px-5">
                     <img
-                      loading="lazy"
+                      loading="eager"
                       src={doorDash}
+                      alt="doordash"
                     />
                   </div>
                 </div>
@@ -75,8 +79,9 @@ const Brands = () => {
                 <div className="flex flex-col justify-center">
                   <div className="flex justify-center items-center px-12 py-8 bg-white rounded-xl border border-solid shadow-2xl border-stone-50 max-md:px-5">
                     <img
-                      loading="lazy"
+                      loading="eager"
                       src={foodPanda}
+                      alt="foodpanda"
                     />
                   </div>
                 </div>
@@ -84,8 +89,9 @@ const Brands = () => {
                 <div className="flex flex-col justify-center">
                   <div className="flex justify-center items-center px-12 py-6 bg-white rounded-xl border border-solid shadow-2xl border-stone-50 max-md:px-5">
                     <img
-                      loading="lazy"
-                      src={deliveroo}
+                      loading="eager"
+                      src={delivergoo}
+                      alt="delivergoo"
                     />
                   </div>
                 </div>
@@ -97,8 +103,9 @@ const Brands = () => {
                 <div className="flex flex-col justify-center">
                   <div className="flex justify-center items-center px-10 py-8 bg-white rounded-xl border border-solid shadow-2xl border-stone-50 max-md:px-5">
                     <img
-                      loading="lazy"
+                      loading="eager"
                       src={instaCart}
+                      alt="instacart"
                     />
                   </div>
                 </div>
@@ -106,8 +113,9 @@ const Brands = () => {
                 <div className="flex flex-col justify-center">
                   <div className="flex justify-center items-center px-12 py-8 bg-white rounded-xl border border-solid shadow-2xl border-stone-50 max-md:px-5">
                     <img
-                      loading="lazy"
+                      loading="eager"
                       src={justEat}
+                      alt="justeat"
                     />
                   </div>
                 </div>
@@ -115,8 +123,9 @@ const Brands = () => {
                 <div className="flex flex-col justify-center">
                   <div className="flex justify-center items-center px-9 py-8 bg-white rounded-xl border border-solid shadow-2xl border-stone-50 max-md:px-5">
                     <img
-                      loading="lazy"
+                      loading="eager"
                       src={didiFood}
+                      alt="didifood"
                     />
                   </div>
                 </div>

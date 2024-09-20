@@ -1,12 +1,13 @@
-import bg from "../assets/hero/bg.jpg"
+import bg from "/hero/main-hero.webp"
 
 const NotFound = () => {
   return (
     <section className="flex overflow-hidden relative flex-col justify-center items-center px-16 py-20 w-full min-h-[802px] max-md:px-5 max-md:max-w-full">
 
       <img
-        loading="lazy"
+        loading="eager"
         src={bg}
+        alt="background"
         className="object-cover absolute inset-0 size-full"
       />
 

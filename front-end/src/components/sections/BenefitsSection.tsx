@@ -16,20 +16,23 @@ const BenefitsSection = () => {
 							<div className="flex gap-5 max-md:flex-col max-md:gap-0">
 								<div className="flex flex-col w-3/5 max-md:ml-0 max-md:w-full">
 									<img
-										loading="lazy"
+										loading="eager"
 										src={chef}
+										alt="chef"
 										className="w-full max-md:mt-6 max-md:max-w-full"
 									/>
 								</div>
 								<div className="flex flex-col ml-5 w-2/5 max-md:ml-0 max-md:w-full">
 									<div className="flex flex-col grow mt-8 max-md:mt-10">
 										<img
-											loading="lazy"
+											loading="eager"
 											src={soup}
+											alt="soup"
 										/>
 										<img
-											loading="lazy"
+											loading="eager"
 											src={sadj}
+											alt="sadj"
 											className="mt-6"
 										/>
 									</div>
