@@ -1,17 +1,19 @@
 import { Routes, Route } from 'react-router-dom'
-import GuestLayout from './layouts/GuestLayout.jsx'
-import UserLayout from './layouts/UserLayout.jsx'
-import AdminLayout from './layouts/GuestLayout.jsx'
 
-import Home from './routes/Home.jsx'
-import About from './routes/About.jsx'
-import Menu from './routes/Menu.jsx'
-import NotFound from './routes/NotFound.jsx'
-import Booking from './routes/Booking.jsx'
-import Login from './routes/Login.jsx'
-import Register from './routes/Register.jsx'
-import MyBookings from './routes/MyBookings.jsx'
-import UserProfile from './routes/UserProfile.jsx'
+import GuestLayout from './layouts/GuestLayout.tsx'
+import UserLayout from './layouts/UserLayout.tsx'
+import AdminLayout from './layouts/GuestLayout.tsx'
+
+import Home from './routes/Home.tsx'
+import About from './routes/About.tsx'
+import Menu from './routes/Menu.tsx'
+// import NotFound from './routes/NotFound.jsx'
+
+import Booking from './routes/Booking.tsx'
+import Login from './routes/Login.tsx'
+import Register from './routes/Register.tsx'
+import MyBookings from './routes/MyBookings.tsx'
+import UserProfile from './routes/UserProfile.tsx'
 
 import './index.css'
 

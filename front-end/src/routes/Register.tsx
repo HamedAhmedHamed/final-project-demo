@@ -1,4 +1,4 @@
-import RegisterForm from "../components/sections/RegisterForm"
+import RegisterForm from "../components/sections/RegisterForm.tsx"
 import bg from "../assets/hero/bg.jpg"
 
 const Register = () => {
