@@ -1,5 +1,3 @@
-import React from 'react'
-
 const TestimonialCard = ({ title, content, author, location, imageSrc }) => {
   return (
     <article className="flex flex-col w-[33%] max-md:ml-0 max-md:w-full">

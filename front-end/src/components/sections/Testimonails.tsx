@@ -1,8 +1,8 @@
 import TestimonialCard from "./TestimonialCard"
 
-import sohpie from "../../assets/users/sophire.png"
-import matt from "../../assets/users/matt.png"
-import andy from "../../assets/users/andy.png"
+import sohpie from "/testimonials/sophire.webp"
+import matt from "/testimonials/matt.webp"
+import andy from "/testimonials/andy.webp"
 
 const Testimonails = () => {
   const reviews = [

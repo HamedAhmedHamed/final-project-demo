@@ -1,12 +1,12 @@
-import uberEats from "../../assets/brands/uber-eats.png"
-import postMates from "../../assets/brands/postmates.png"
-import grubHub from "../../assets/brands/grubhub.png"
-import justEat from "../../assets/brands/justeat.png"
-import foodPanda from "../../assets/brands/foodpanda.png"
-import doorDash from "../../assets/brands/doordash.png"
-import deliveroo from "../../assets/brands/deliveroo.png"
-import instaCart from "../../assets/brands/instacart.png"
-import didiFood from "../../assets/brands/didi-food.png"
+import uberEats from "/brands/uber-eats.webp"
+import postMates from "/brands/postmates.webp"
+import grubHub from "/brands/grubhub.webp"
+import justEat from "/brands/just-eat.webp"
+import foodPanda from "/brands/food-panda.webp"
+import doorDash from "/brands/door-dash.webp"
+import deliveroo from "/brands/delivergoo.webp"
+import instaCart from "/brands/insta-cart.webp"
+import didiFood from "/brands/didi-foods.webp"
 
 const Brands = () => {
   return (

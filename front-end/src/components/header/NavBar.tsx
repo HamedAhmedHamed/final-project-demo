@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import useAuthContext from "../../context/AuthContext"
-import logo from "../../assets/logo/japanese-food.svg"
+import logo from "/japanese-food.svg"
 
 const NavBar = () => {
   const { user, logout } = useAuthContext()

@@ -1,5 +1,5 @@
 import RegisterForm from "../components/sections/RegisterForm.tsx"
-import bg from "../assets/hero/bg.jpg"
+import bg from "/hero/main-hero.webp"
 
 const Register = () => {
   return (

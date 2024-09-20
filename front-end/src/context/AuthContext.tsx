@@ -1,10 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, type PropsWithChildren } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({})
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [isLoading, setIsLoading] = useState(false)

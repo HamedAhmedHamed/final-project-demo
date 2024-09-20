@@ -1,6 +1,6 @@
-import chef from "../../assets/benefits/chef.png"
-import sadj from "../../assets/benefits/sadj.png"
-import soup from "../../assets/benefits/soup.png"
+import chef from "/sections/chef.webp"
+import sadj from "/sections/sadj.webp"
+import soup from "/sections/soup.webp"
 
 import { FaRegClock } from "react-icons/fa6";
 import { RiCoupon5Line } from "react-icons/ri";

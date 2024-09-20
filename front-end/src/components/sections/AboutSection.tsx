@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import contactInfo from "../../assets/about-section/img.png"
+import contactInfo from "/sections/about-section.webp"
 
 const AboutSection = ({ callToActionBtn = true }) => {
 	return (

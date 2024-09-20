@@ -1,5 +1,5 @@
 import LoginForm from "../components/sections/LoginForm"
-import bg from "../assets/booking/Map.png"
+import bg from "/sections/map.webp"
 
 const Login = () => {
   return (

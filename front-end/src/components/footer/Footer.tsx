@@ -1,8 +1,9 @@
-import eggs from "../../assets/footer/eggs.png"
-import chips from "../../assets/footer/chips.png"
-import salad from "../../assets/footer/salad.png"
-import pancake from "../../assets/footer/pancake.png"
-import logo from "../../assets/logo/white-japanese-food.svg"
+import eggs from "/footer/eggs.webp"
+import chips from "/footer/chips.webp"
+import salad from "/footer/salad.webp"
+import pancake from "/footer/pancake.webp"
+import logo from "/logo/white-japanese-food.svg"
+
 import { FaFacebookF, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react"

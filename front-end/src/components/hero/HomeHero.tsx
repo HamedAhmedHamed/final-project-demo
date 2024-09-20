@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import bg from "../../assets/hero/bg.jpg"
+import bg from "/hero/main-hero.webp"
 
 const HomeHero = () => {
 
