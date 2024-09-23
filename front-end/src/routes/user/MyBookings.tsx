@@ -1,4 +1,4 @@
-import MyBookingsList from "../components/sections/MyBookingsList"
+import MyBookingsList from "../../components/sections/MyBookingsList"
 
 const MyBookings = () => {
   return (

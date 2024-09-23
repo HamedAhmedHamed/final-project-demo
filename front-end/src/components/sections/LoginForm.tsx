@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import { Link } from "react-router-dom"
 import { BeatLoader } from "react-spinners"
 import useAuthContext from "../../context/AuthContext"
@@ -9,9 +9,9 @@ const LoginForm = () => {
     password: ""
   })
 
-  const { errors, isLoading, login, isAdmin } = useAuthContext()
+  const { errors, isLoading, login } = useAuthContext()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     login(user)
   }

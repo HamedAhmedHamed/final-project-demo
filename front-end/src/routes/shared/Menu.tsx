@@ -1,5 +1,5 @@
-import MenuSection from '../components/sections/MenuSection'
-import Brands from '../components/sections/Brands'
+import MenuSection from '../../components/sections/MenuSection'
+import Brands from '../../components/sections/Brands'
 
 const Menu = () => {
   return (

@@ -5,11 +5,15 @@ import pancake from "/footer/pancake.webp"
 import logo from "/logo/white-japanese-food.svg"
 
 import { FaFacebookF, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react"
+
+import { guestNavigation, userNavigation, adminNavigation } from "../header/NavBar"
+import useAuthContext from "../../context/AuthContext"
 
 const Footer = () => {
 	const [date, setDate] = useState<number | null>(null)
+	const { user } = useAuthContext()
 
 	useEffect(() => {
 		setDate(() => new Date().getFullYear())
@@ -65,42 +69,57 @@ const Footer = () => {
 					</div>
 					<div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
 						<div className="flex gap-5 justify-center text-base leading-6 max-md:mt-10 max-md:justify-between">
-							<div className="flex flex-col whitespace-nowrap">
+							<nav className="flex flex-col whitespace-nowrap">
 								<div className="font-bold text-white">Pages</div>
 
-								<ul className="flex flex-col mt-10 text-stone-300">
-									<li>
-										<Link to="/home" className="capitalize">
-											home
-										</Link>
-									</li>
-
-									<li className="mt-5">
-										<Link to="/about" className="capitalize">
-											about
-										</Link>
-									</li>
-
-									<li className="mt-5">
-										<Link to="/menu" className="capitalize">
-											menu
-										</Link>
-									</li>
-
-									<li className="mt-5">
-										<Link to="/register" className="capitalize">
-											register
-										</Link>
-									</li>
-
-									<li className="mt-5">
-										<Link to="/login" className="capitalize">
-											login
-										</Link>
-									</li>
+								<ul className="flex flex-col mt-8 text-stone-300">
+									{(user.role === "guest")
+										? guestNavigation.map((link, i) => (
+											<li key={i} className="mt-5">
+												<NavLink
+													to={link.navigateTo}
+													className={({ isActive }) => (
+														isActive
+															? "capitalize"
+															: "capitalize"
+													)}
+												>
+													{link.label}
+												</NavLink>
+											</li>
+										))
+										: (user.role === "user")
+											? userNavigation.map((link, i) => (
+												<li key={i} className="mt-5">
+													<NavLink
+														to={link.navigateTo}
+														className={({ isActive }) => (
+															isActive
+																? "capitalize"
+																: "capitalize"
+														)}
+													>
+														{link.label}
+													</NavLink>
+												</li>
+											))
+											: adminNavigation.map((link, i) => (
+												<li key={i} className="mt-5">
+													<NavLink
+														to={link.navigateTo}
+														className={({ isActive }) => (
+															isActive
+																? "capitalize"
+																: "capitalize"
+														)}
+													>
+														{link.label}
+													</NavLink>
+												</li>
+											))}
 								</ul>
 
-							</div>
+							</nav>
 						</div>
 					</div>
 

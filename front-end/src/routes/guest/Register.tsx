@@ -1,4 +1,4 @@
-import RegisterForm from "../components/sections/RegisterForm.tsx"
+import RegisterForm from "../../components/sections/RegisterForm.tsx"
 import bg from "/hero/main-hero.webp"
 
 const Register = () => {
@@ -8,6 +8,7 @@ const Register = () => {
       <img
         src={bg}
         loading="eager"
+        className="w-full"
         alt="background"
       />
     </main>

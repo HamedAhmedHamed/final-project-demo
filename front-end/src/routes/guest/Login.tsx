@@ -1,4 +1,4 @@
-import LoginForm from "../components/sections/LoginForm"
+import LoginForm from "../../components/sections/LoginForm"
 import bg from "/sections/map.webp"
 
 const Login = () => {
@@ -7,6 +7,7 @@ const Login = () => {
       <LoginForm />
       <img
         src={bg}
+        className="w-full"
         alt="map background"
       />
     </main>
