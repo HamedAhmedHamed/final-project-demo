@@ -3,13 +3,7 @@ import { useEffect } from "react"
 import useAuthContext from "../../context/AuthContext"
 
 const EditUser = () => {
-  const { user, getUser } = useAuthContext()
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     getUser()
-  //   }
-  // }, [user])
+  const { user } = useAuthContext()
 
   return (
     <section className="flex flex-col items-start px-5 w-full bg-stone-50 max-md:max-w-full">
@@ -22,41 +16,44 @@ const EditUser = () => {
 
         <div className="flex flex-col w-full max-md:w-full">
           <label htmlFor="name" className='capitalize font-bold'>name</label>
-          {/* <input
+          <input
             id='name'
             type="text"
-            value={user?.name}
+            value={user.name}
+            onChange={() => null}
             disabled
             pattern="[A-Za-z\s]+"
             title="Name should only contain letters and spaces."
             required
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
-          /> */}
+          />
         </div>
 
         <div className="flex flex-col w-full max-md:w-full">
           <label htmlFor="email" className='capitalize font-bold'>email</label>
-          {/* <input
+          <input
             id='email'
             type="email"
-            value={user?.email}
+            value={user.email}
+            onChange={() => null}
             disabled
             required
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
-          /> */}
+          />
         </div>
 
         <div className="flex flex-col w-full max-md:w-full">
           <label htmlFor="password" className="capitalize font-bold">password</label>
-          {/* <input
+          <input
             id="password"
             type="password"
             placeholder="Enter Your Password"
             value="********"
+            onChange={() => null}
             required
             disabled
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
-          /> */}
+          />
         </div>
 
         <button

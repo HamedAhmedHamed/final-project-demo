@@ -1,6 +1,13 @@
 import { createContext, useContext, useEffect, useState, type PropsWithChildren } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { type AxiosResponse } from "axios";
+
+export enum Roles {
+  user = "user",
+  admin = "admin",
+  guest = "guest",
+}
 
 export interface User {
   id: number;
@@ -9,7 +16,7 @@ export interface User {
   email_verified_at: string;
   created_at: string;
   updated_at: string;
-  role: "user" | "admin" | "guest"
+  role: Roles.user | Roles.admin | Roles.guest;
 }
 
 interface ValidationError {
@@ -29,11 +36,12 @@ interface AuthContext {
   errors: ValidationError["response"]["data"]["errors"] | null;
   isLoading: boolean;
 
+  csrf: () => Promise<AxiosResponse>;
   getUser: () => Promise<void>;
   login: ({ ...credentials }: { email: string; password: string }) => Promise<void>;
   register: ({ ...credentials }: {
     name: string;
-    role: "user" | "admin";
+    role: Roles.user | Roles.admin;
     email: string;
     password: string;
     password_confirmation: string;
@@ -51,7 +59,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     email_verified_at: "",
     created_at: "",
     updated_at: "",
-    role: "guest"
+    role: Roles.guest
   })
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [errors, setErrors] = useState<ValidationError["response"]["data"]["errors"] | null>(null)
@@ -87,7 +95,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       sessionStorage.setItem("access-token", data.token)
       setErrors(null)
       await getUser()
-      navigate("/profile")
+      navigate("/home")
     } catch (err: unknown) {
       const error = err as ValidationError
       if (error.status === 422)
@@ -105,7 +113,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       sessionStorage.setItem("access-token", data.token)
       setErrors(null)
       await getUser()
-      navigate("/profile")
+      navigate("/home")
     } catch (err: unknown) {
       const error = err as ValidationError
       if (error.status === 422)
@@ -132,7 +140,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         email_verified_at: "",
         created_at: "",
         updated_at: "",
-        role: "guest"
+        role: Roles.guest,
       }))
       sessionStorage.removeItem("access-token")
       navigate("/login")
@@ -155,6 +163,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   return (
     <AuthContext.Provider
       value={{
+        csrf,
         user,
         errors,
         isLoading,

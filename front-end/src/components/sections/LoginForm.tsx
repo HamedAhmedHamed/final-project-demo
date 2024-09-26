@@ -58,9 +58,10 @@ const LoginForm = () => {
           type="submit"
           className="px-8 py-5 mt-6 font-bold text-center capitalize text-white bg-rose-700 rounded-[118px] max-md:px-5 max-md:max-w-full"
         >
-          {isLoading
+          {/* {isLoading
             ? <BeatLoader color="snow" />
-            : "login"}
+            : "login"} */}
+            login
         </button>
 
         <div className="flex justify-between items-center w-full">

@@ -56,6 +56,14 @@ export const userNavigation: NavigationLink[] = [
 
 export const adminNavigation: NavigationLink[] = [
   {
+    label: "home",
+    navigateTo: "/home"
+  },
+  {
+    label: "about",
+    navigateTo: "/about"
+  },
+  {
     label: "admin panel",
     navigateTo: "/admin-panel"
   },

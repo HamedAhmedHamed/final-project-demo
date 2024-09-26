@@ -1,11 +1,54 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, FormEvent } from "react"
+import api from "../../api/api";
+import useAuthContext from "../../context/AuthContext";
+
+export enum BookingStatus {
+  pending = "pending",
+  accepted = "accepted",
+  rejected = "rejected"
+}
+
+export interface Booking {
+  data: string;
+  time: string;
+  name: string;
+  phone: string;
+  noOfPersons: string;
+  status: BookingStatus.accepted | BookingStatus.pending | BookingStatus.rejected;
+}
 
 const BookingForm = () => {
   const [currentDate, setCurrentDate] = useState<string | null>(null)
+  const { csrf } = useAuthContext()
+  const [booking, setBooking] = useState<Booking>({
+    data: "",
+    time: "",
+    name: "",
+    phone: "",
+    noOfPersons: "",
+    status: BookingStatus.pending
+  })
 
   useEffect(() => {
     setCurrentDate(() => new Date().toISOString().substring(0, 10))
   }, [currentDate])
+
+  const handleBooking = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const token = sessionStorage.getItem("access-token");
+    await csrf()
+    try {
+      const { data } = await api.post("/api/register-book", booking, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }) 
+      console.log(data)
+    } catch (error) {
+      console.log(error)  
+    } finally {
+    }
+  }
 
   return (
     <section className="flex z-10 flex-col items-center px-5 w-full bg-stone-50 max-md:max-w-full">
@@ -19,7 +62,10 @@ const BookingForm = () => {
         to change to create a truly happens.
       </p>
 
-      <form className="flex z-10 flex-col px-12 py-12 mt-20 -mb-60 max-w-full text-base leading-6 bg-white rounded-2xl border border-white border-solid shadow-2xl w-[812px] max-md:px-5 max-md:mt-10 max-md:mb-2.5">
+      <form
+        onSubmit={handleBooking}
+        className="flex z-10 flex-col px-12 py-12 mt-20 -mb-60 max-w-full text-base leading-6 bg-white rounded-2xl border border-white border-solid shadow-2xl w-[812px] max-md:px-5 max-md:mt-10 max-md:mb-2.5"
+      >
 
         <div className="flex justify-between gap-5 text-stone-800 max-md:flex-wrap">
 
@@ -27,8 +73,10 @@ const BookingForm = () => {
             <label htmlFor="date" className='capitalize font-bold'>date</label>
             <input
               id='date'
+              value={booking.data}
+              onChange={(e) => setBooking(() => ({ ...booking, data: e.target.value }))}
               type="date"
-              min={currentDate}
+              min={currentDate!}
               required
               className='px-6 py-5 mt-2 text-start w-full border border-solid border-stone-300 rounded-[72px]'
             />
@@ -38,6 +86,8 @@ const BookingForm = () => {
             <label htmlFor="time" className="capitalize font-bold">time</label>
             <input
               id="time"
+              value={booking.time}
+              onChange={(e) => setBooking(() => ({ ...booking, time: e.target.value }))}
               type="time"
               max="01:00"
               min="09:00"
@@ -55,6 +105,8 @@ const BookingForm = () => {
 
             <input
               id="name"
+              value={booking.name}
+              onChange={(e) => setBooking(() => ({ ...booking, name: e.target.value }))}
               type="text"
               placeholder="Enter Your Name"
               pattern="[A-Za-z\s]+"
@@ -69,9 +121,11 @@ const BookingForm = () => {
 
             <input
               id="phone"
+              value={booking.phone}
+              onChange={(e) => setBooking(() => ({ ...booking, phone: e.target.value }))}
               type="text"
               placeholder="XXX-XXX-XXXX"
-              maxLength="11"
+              maxLength={11}
               pattern="\d{11}"
               title="Phone number must be 11 numbers long"
               required
@@ -86,6 +140,8 @@ const BookingForm = () => {
           <input
             type="number"
             id="total-person"
+            value={booking.noOfPersons}
+            onChange={(e) => setBooking(() => ({ ...booking, noOfPersons: e.target.value }))}
             min="1"
             max="1000"
             placeholder="1 Person"
