@@ -1,53 +1,7 @@
 import { createContext, useContext, useEffect, useState, type PropsWithChildren } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
-import { type AxiosResponse } from "axios";
-
-export enum Roles {
-  user = "user",
-  admin = "admin",
-  guest = "guest",
-}
-
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  email_verified_at: string;
-  created_at: string;
-  updated_at: string;
-  role: Roles.user | Roles.admin | Roles.guest;
-}
-
-interface ValidationError {
-  response: {
-    data: {
-      errors: {
-        email?: string[];
-        password?: string[];
-      }
-    }
-  };
-  status: number;
-}
-
-interface AuthContext {
-  user: User;
-  errors: ValidationError["response"]["data"]["errors"] | null;
-  isLoading: boolean;
-
-  csrf: () => Promise<AxiosResponse>;
-  getUser: () => Promise<void>;
-  login: ({ ...credentials }: { email: string; password: string }) => Promise<void>;
-  register: ({ ...credentials }: {
-    name: string;
-    role: Roles.user | Roles.admin;
-    email: string;
-    password: string;
-    password_confirmation: string;
-  }) => Promise<void>;
-  logout: () => Promise<void>;
-}
+import { type AuthContext, User, Roles, type ValidationError } from "../types/auth.interface";
 
 const AuthContext = createContext<AuthContext | null>(null)
 
@@ -67,14 +21,17 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const csrf = async () => api.get("/sanctum/csrf-cookie")
 
+  const getAccessToken = () => {
+    return sessionStorage.getItem("access-token")!
+  }
+
   const getUser = async () => {
     setIsLoading(true)
     await csrf()
-    const token = sessionStorage.getItem("access-token")
     try {
       const { data } = await api.get("/api/user", {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${getAccessToken()}`
         }
       })
       // DEBUG
@@ -126,11 +83,10 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const logout = async () => {
     setIsLoading(true)
     await csrf()
-    const token = localStorage.getItem("access-token")
     try {
       await api.post("/logout", {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${getAccessToken()}`
         }
       })
       setUser(() => ({
@@ -164,6 +120,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     <AuthContext.Provider
       value={{
         csrf,
+        getAccessToken,
         user,
         errors,
         isLoading,

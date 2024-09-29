@@ -32,6 +32,5 @@ Route::middleware(['auth:sanctum', 'role:user'])->group(function ()
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function ()
 {
-    Route::post("/accept-booking/{id}", [BookingController::class, "accept"]);
-    Route::post("/reject-booking/{id}", [BookingController::class, "reject"]);
+    Route::put("/handle-confirmation/{id}", [BookingController::class, "update"]);
 });

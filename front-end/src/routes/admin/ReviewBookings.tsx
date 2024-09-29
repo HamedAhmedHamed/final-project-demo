@@ -1,5 +1,5 @@
 import MyBookingsList from "../../components/sections/MyBookingsList"
-import { Roles } from "../../context/AuthContext"
+import { Roles } from "../../types/auth.interface"
 
 MyBookingsList
 const ReviewBookings = () => {

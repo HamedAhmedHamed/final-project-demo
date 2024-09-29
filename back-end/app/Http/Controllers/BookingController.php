@@ -30,11 +30,11 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $booking = Booking::create([
-            "registration_date" => $request->data,
-            "registration_time" => $request->time,
+            "registration_date" => $request->registration_date,
+            "registration_time" => $request->registration_time,
             "name" => $request->name,
             "phone" => $request->phone,
-            "number_of_persons" => $request->noOfPersons,
+            "number_of_persons" => $request->number_of_persons,
             "status" => $request->status
         ]);
 
@@ -56,30 +56,32 @@ class BookingController extends Controller
     {
     }
 
-    public function accept(string $id)
-    {
-        Booking::where('id', $id)->update([
-            "status" => "accepted"
-        ]);
+    // public function accept(string $id)
+    // {
+    //     Booking::where('id', $id)->update([
+    //         "status" => "accepted"
+    //     ]);
 
-        return response()->noContent();
-    }
+    //     return response()->noContent();
+    // }
     
-    public function reject(string $id)
-    {
-        Booking::where('id', $id)->update([
-            "status" => "rejected"
-        ]);
+    // public function reject(string $id)
+    // {
+    //     Booking::where('id', $id)->update([
+    //         "status" => "rejected"
+    //     ]);
 
-        return response()->noContent();
-    }
+    //     return response()->noContent();
+    // }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        Booking::where('id', $id)->update([
+            'status' => $request->status
+        ]);
     }
 
     /**

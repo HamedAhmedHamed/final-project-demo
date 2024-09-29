@@ -1,32 +1,25 @@
 import { useState, useEffect, FormEvent } from "react"
 import api from "../../api/api";
+import { Booking, BookingStatus } from "../../types/booking.interface";
+import { BeatLoader } from "react-spinners";
 import useAuthContext from "../../context/AuthContext";
-
-export enum BookingStatus {
-  pending = "pending",
-  accepted = "accepted",
-  rejected = "rejected"
-}
-
-export interface Booking {
-  data: string;
-  time: string;
-  name: string;
-  phone: string;
-  noOfPersons: string;
-  status: BookingStatus.accepted | BookingStatus.pending | BookingStatus.rejected;
-}
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 const BookingForm = () => {
   const [currentDate, setCurrentDate] = useState<string | null>(null)
-  const { csrf } = useAuthContext()
+  const { csrf, getAccessToken } = useAuthContext()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [booking, setBooking] = useState<Booking>({
-    data: "",
-    time: "",
+    created_at: "",
+    id: NaN,
     name: "",
     phone: "",
-    noOfPersons: "",
-    status: BookingStatus.pending
+    number_of_persons: "",
+    registration_date: "",
+    registration_time: "",
+    status: BookingStatus.pending,
+    updated_at: ""
   })
 
   useEffect(() => {
@@ -35,23 +28,39 @@ const BookingForm = () => {
 
   const handleBooking = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const token = sessionStorage.getItem("access-token");
+    setIsLoading(() => true)
     await csrf()
     try {
-      const { data } = await api.post("/api/register-book", booking, {
+      const { data } = await api.post<Booking>("/api/register-book", {
+        "registration_date": booking.registration_date,
+        "registration_time": booking.registration_time,
+        "name": booking.name,
+        "phone": booking.phone,
+        "number_of_persons": booking.number_of_persons,
+        "status": booking.status
+      }, {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${getAccessToken()}`
         }
-      }) 
+      })
+      toast.success("Booking registered successfully", {
+        position: "top-right"
+      })
       console.log(data)
     } catch (error) {
-      console.log(error)  
+      console.log(error)
     } finally {
+      setIsLoading(() => false)
     }
   }
 
   return (
     <section className="flex z-10 flex-col items-center px-5 w-full bg-stone-50 max-md:max-w-full">
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+      />
 
       <h1 className="mt-20 capitalize font-playfair text-8xl text-center leading-[96px] text-stone-800 max-md:mt-10 max-md:max-w-full max-md:text-4xl">
         book a table
@@ -73,8 +82,8 @@ const BookingForm = () => {
             <label htmlFor="date" className='capitalize font-bold'>date</label>
             <input
               id='date'
-              value={booking.data}
-              onChange={(e) => setBooking(() => ({ ...booking, data: e.target.value }))}
+              value={booking.registration_date}
+              onChange={(e) => setBooking(() => ({ ...booking, registration_date: e.target.value }))}
               type="date"
               min={currentDate!}
               required
@@ -86,8 +95,8 @@ const BookingForm = () => {
             <label htmlFor="time" className="capitalize font-bold">time</label>
             <input
               id="time"
-              value={booking.time}
-              onChange={(e) => setBooking(() => ({ ...booking, time: e.target.value }))}
+              value={booking.registration_time}
+              onChange={(e) => setBooking(() => ({ ...booking, registration_time: e.target.value }))}
               type="time"
               max="01:00"
               min="09:00"
@@ -140,8 +149,8 @@ const BookingForm = () => {
           <input
             type="number"
             id="total-person"
-            value={booking.noOfPersons}
-            onChange={(e) => setBooking(() => ({ ...booking, noOfPersons: e.target.value }))}
+            value={booking.number_of_persons}
+            onChange={(e) => setBooking(() => ({ ...booking, number_of_persons: e.target.value }))}
             min="1"
             max="1000"
             placeholder="1 Person"
@@ -154,7 +163,11 @@ const BookingForm = () => {
           type="submit"
           className="px-8 py-5 mt-6 font-bold text-center capitalize text-white bg-rose-700 rounded-[118px] max-md:px-5 max-md:max-w-full"
         >
-          book a table
+          {isLoading ? (
+            <BeatLoader color="snow" />
+          ) :
+            "book a table"
+          }
         </button>
 
       </form>
