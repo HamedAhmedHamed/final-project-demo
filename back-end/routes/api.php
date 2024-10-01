@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\MenuItemsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,7 @@ Route::middleware(['auth:sanctum', 'role:user'])->group(function ()
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function ()
 {
     Route::put("/handle-confirmation/{id}", [BookingController::class, "update"]);
+
+    Route::get('/menu', [MenuItemsController::class, 'index']);
+    Route::post('/menu/store', [MenuItemsController::class, 'store']);
 });

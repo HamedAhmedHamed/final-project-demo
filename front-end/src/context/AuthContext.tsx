@@ -137,7 +137,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
 export default function useAuthContext() {
   const ctx = useContext(AuthContext) as AuthContext
-  if (ctx === undefined)
+  if (ctx === null)
     throw new Error("useAuthContext must be used within an AuthProvider")
   return ctx
 }

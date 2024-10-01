@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import Layout from './layouts/Layout.tsx'
 import ProtectedRoute from './components/ProtectedRoute.tsx'
@@ -22,6 +22,7 @@ const App = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
+        <Route path='/' element={<Navigate to="/home" />} />
         <Route path='/home' element={
           <ProtectedRoute allowedModels={["guest", "user", "admin"]}>
             <Home />

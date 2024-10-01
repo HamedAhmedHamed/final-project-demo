@@ -1,6 +1,10 @@
+import ModifyMenuForm from "../../components/sections/ModifyMenuForm"
+
 const ModifyMenu = () => {
   return (
-    <div>ModifyMenu</div>
+    <main>
+      <ModifyMenuForm />
+    </main>
   )
 }
 

@@ -1,11 +1,14 @@
 import MyBookingsList from "../../components/sections/MyBookingsList"
+import { BookingProvider } from "../../context/BookingContext"
 import { Roles } from "../../types/auth.interface"
 
 MyBookingsList
 const ReviewBookings = () => {
   return (
     <main>
-      <MyBookingsList role={Roles.admin} />
+      <BookingProvider>
+        <MyBookingsList role={Roles.admin} />
+      </BookingProvider>
     </main>
   )
 }

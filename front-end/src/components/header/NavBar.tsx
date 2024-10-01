@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import useAuthContext from "../../context/AuthContext"
+import { NavButton } from "../ui/button/NavButton"
 import logo from "/japanese-food.svg"
 
 export type NavigationLink = { navigateTo: string; label: string; }

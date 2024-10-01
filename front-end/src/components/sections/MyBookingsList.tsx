@@ -1,127 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { FaRegClock } from "react-icons/fa6";
 import { MdOutlineDateRange, MdDriveFileRenameOutline, MdApproval } from "react-icons/md"
 import { HiOutlinePhone } from "react-icons/hi";
 import { AiOutlineFieldNumber } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import { FaHashtag } from "react-icons/fa";
 
-import api from "../../api/api";
-import useAuthContext from "../../context/AuthContext";
-import { Booking, BookingStatus } from "../../types/booking.interface";
+import BookingDetails from "./BookingDetails";
 import { Roles } from "../../types/auth.interface";
 import { AiOutlineCloseCircle, AiOutlineCheckCircle } from "react-icons/ai";
+import useBooking from "../../context/BookingContext";
 import { BeatLoader } from "react-spinners";
 
-const BookingDetails = ({ role, booking }: { role: Roles, booking: Booking }) => {
-  const [bookingStatus, setBookingStatus] = useState<BookingStatus>(booking.status)
-  // STALE STATE
-  const bookingStatusRef = useRef<BookingStatus>(bookingStatus)
-  const { csrf, getAccessToken } = useAuthContext()
-
-  useEffect(() => {
-    bookingStatusRef.current = bookingStatus
-  }, [bookingStatus])
-
-  const handleConfirmation = async () => {
-    await csrf()
-    try {
-      await api.put(`/api/handle-confirmation/${booking.id}`, { status: bookingStatusRef.current }, {
-        headers: {
-          Authorization: `Bearer ${getAccessToken()}`
-        }
-      })
-    } catch (error) {
-      console.log(error)
-    } finally {
-    }
-  }
-
-  return (
-    <tr
-      className={`border-b "border-neutral-200" transition duration-300 ease-in-out ${bookingStatus === BookingStatus.accepted
-        ? "hover:bg-green-100"
-        : bookingStatus === BookingStatus.rejected ? "hover:bg-rose-100" : "hover:bg-neutral-100"}`}
-    >
-      <td className="whitespace-nowrap px-6 py-4 font-medium">{booking.id}</td>
-      <td className="whitespace-nowrap px-6 py-4">{booking.registration_date}</td>
-      <td className="whitespace-nowrap px-6 py-4">{booking.registration_time}</td>
-      <td className="whitespace-nowrap px-6 py-4">{booking.name}</td>
-      <td className="whitespace-nowrap px-6 py-4">{booking.phone}</td>
-      <td className="whitespace-nowrap px-6 py-4">{booking.number_of_persons}</td>
-
-      {role === Roles.admin ? (
-        <td className="px-6 py-4 capitalize whitespace-nowrap">
-          <div className="flex justify-evenly">
-            <button
-              className={`px-2 py-1 w-16 text-white rounded-md ${bookingStatus === BookingStatus.pending
-                ? "bg-green-500"
-                : bookingStatus === BookingStatus.accepted ? "bg-amber-500" : "bg-green-500 opacity-70"}`}
-
-              disabled={bookingStatus === BookingStatus.rejected}
-              onClick={() => {
-                setBookingStatus((prev) => prev === BookingStatus.accepted ? BookingStatus.pending : BookingStatus.accepted)
-                handleConfirmation()
-              }}
-            >
-              {(bookingStatus === BookingStatus.accepted || bookingStatus === BookingStatus.pending) ? (
-                <BeatLoader color="snow" size={5} />
-              ) : bookingStatus === BookingStatus.accepted ? "undo" : "accept"}
-            </button>
-
-            <button
-              className={`px-2 py-1 w-16 text-white rounded-md ${bookingStatus === BookingStatus.pending
-                ? "bg-rose-500"
-                : bookingStatus === BookingStatus.rejected ? "bg-amber-500" : "bg-rose-500 opacity-70"}`}
-              disabled={bookingStatus === BookingStatus.accepted}
-              onClick={() => {
-                setBookingStatus((prev) => prev === BookingStatus.rejected ? BookingStatus.pending : BookingStatus.rejected)
-                handleConfirmation()
-              }}
-            >
-              {isLoading && (bookingStatus === BookingStatus.rejected || bookingStatus === BookingStatus.pending) ? (
-                <BeatLoader color="snow" size={5} />
-              ) : bookingStatus === BookingStatus.rejected ? "undo" : "reject"}
-            </button>
-          </div>
-        </td>
-      ) : (
-        <td className="whitespace-nowrap px-6 py-4">
-          {/*booking.status === BookingStatus.accepted ? (
-            <span className="px-2 py-1 w-16 bg-green-400 text-white font-bold rounded-full capitalize">{BookingStatus.accepted}</span>
-          ) : booking.status === BookingStatus.rejected ? (
-            <span className="px-2 py-1 w-16 bg-rose-500 text-white font-bold rounded-full capitalize">{BookingStatus.rejected}</span>
-          ) : (
-            <span className="px-2 py-1 w-16 bg-blue-400 text-white font-bold rounded-full capitalize">{booking.status}</span>
-          )*/}
-          <span className={`px-2 py-1 w-16 ${bookingStatus === BookingStatus.accepted
-          ? "bg-green-400"
-          : bookingStatus === BookingStatus.rejected
-          ? "bg-rose-500" : "bg-cyan-600"} text-white font-bold rounded-full capitalize`}>{bookingStatus}</span>
-        </td>
-      )}
-    </tr>
-  )
-}
-
 const MyBookingsList = ({ role = Roles.user }: { role: Roles }) => {
-  const [bookings, setBookings] = useState<Booking[] | null>(null);
-  const { csrf, getAccessToken } = useAuthContext()
+  const { fetchBookings, bookings, isGlobalLoading } = useBooking()
 
   useEffect(() => {
-    const fetchBookings = async () => {
-      await csrf()
-      try {
-        const { data } = await api.get<Booking[]>("/api/get-bookings", {
-          headers: {
-            Authorization: `Bearer ${getAccessToken()}`
-          }
-        })
-        console.log(data)
-        setBookings(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
     fetchBookings()
   }, [])
 
@@ -192,95 +86,25 @@ const MyBookingsList = ({ role = Roles.user }: { role: Roles }) => {
                 </thead>
 
                 <tbody>
-                  {/* {bookings?.map((booking, i) => (
-                    <tr key={i} className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600">
-                      <td className="whitespace-nowrap px-6 py-4 font-medium">{booking.id}</td>
-                      <td className="whitespace-nowrap px-6 py-4">{booking.registration_date}</td>
-                      <td className="whitespace-nowrap px-6 py-4">{booking.registration_time}</td>
-                      <td className="whitespace-nowrap px-6 py-4">{booking.name}</td>
-                      <td className="whitespace-nowrap px-6 py-4">{booking.phone}</td>
-                      <td className="whitespace-nowrap px-6 py-4">{booking.number_of_persons}</td>
 
-                      {role === Roles.admin ? (
-                        <td className="px-6 py-4 capitalize whitespace-nowrap">
-                          <div className="flex justify-evenly">
-                            {booking.status === BookingStatus.accepted ? (
-                              <>
-                                <button
-                                  className="px-2 py-1 bg-green-500 text-white rounded-md"
-                                  disabled
-                                  onClick={() => null}
-                                >
-                                  accepted
-                                </button>
-                                <button
-                                  className="px-2 py-1 bg-rose-500 text-white rounded-md"
-                                  onClick={() => null}
-                                >
-                                  rejected
-                                </button>
-                              </>
-                            ) : booking.status === BookingStatus.rejected ? (
-                              <>
-                                <button
-                                  className="px-2 py-1 bg-orange-400 text-white rounded-md"
-                                  onClick={() => null}
-                                >
-                                  undo
-                                </button>
-                                <button
-                                  className="px-2 py-1 bg-red-500 text-white rounded-md"
-                                  disabled
-                                  onClick={() => null}
-                                >
-                                  rejected
-                                </button>
-                              </>
-                            ) : (
-                              <>
-                                <button
-                                  className="px-2 py-1 bg-green-500 text-white rounded-md"
-                                  onClick={() => handleConfirmation(booking.id, BookingStatus.accepted)}
-                                >
-                                  accept
-                                </button>
-                                <button
-                                  className="px-2 py-1 bg-red-500 text-white rounded-md"
-                                  onClick={() => handleConfirmation(booking.id, BookingStatus.rejected)}
-                                >
-                                  reject
-                                </button>
-                              </>
-                            )}
-                          </div>
-                        </td>
-                      ) : (
-                        <td className="whitespace-nowrap px-6 py-4">
-                          {booking.status === BookingStatus.accepted ? (
-                            <span className="px-2 py-1 bg-green-400 text-white font-bold rounded-full capitalize">{BookingStatus.accepted}</span>
-                          ) : booking.status === BookingStatus.rejected ? (
-                            <span className="px-2 py-1 bg-rose-500 text-white font-bold rounded-full capitalize">{BookingStatus.rejected}</span>
-                          ) : (
-                            <span className="px-2 py-1 bg-blue-400 text-white font-bold rounded-full capitalize">{booking.status}</span>
-                          )}
-                        </td>
-                      )}
-                    </tr>
-                  ))} */}
-                  {bookings?.map((booking) => (
+                  {bookings.map((booking) => (
                     <BookingDetails key={booking.id} role={role} booking={booking} />
                   ))}
                 </tbody>
 
-                {/* <caption className="caption-bottom py-4 text-2xl font-playfair">
-                  you haven't booked yet, <Link to="/book-a-table"> book a table now </Link>
-                </caption> */}
+                {isGlobalLoading ? (
+                  <BeatLoader />
+                ) : !bookings.length && (
+                  <caption className="caption-bottom py-4 text-2xl font-playfair">
+                    you haven't booked yet, <Link to="/book-a-table"> book a table now </Link>
+                  </caption>
+                )}
               </table>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section >
   )
 }
 

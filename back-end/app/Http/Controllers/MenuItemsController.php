@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
+use App\Models\MenuItems;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class MenuItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $bookings = Booking::all();
-        return response()->json($bookings);
+        //
     }
 
     /**
@@ -29,13 +28,27 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        $booking = Booking::create([
-            "registration_date" => $request->registration_date,
-            "registration_time" => $request->registration_time,
-            "name" => $request->name,
-            "phone" => $request->phone,
-            "number_of_persons" => $request->number_of_persons,
-            "status" => $request->status
+        $validator = $request->validate([
+            'image' => 'required|mimes:png,jpg,jpeg,webp',
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'category' => 'required'
+        ]);
+
+        if ($request->has('image')) {
+            $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+
+            $imageName = time().''.$ext;
+            $path = '/uploads/menu-items';
+
+            $image->move($path, $imageName);
+        }
+
+        MenuItems::create([
+            'image' => $path . $imageName,
+            ...$validator
         ]);
 
         return response()->noContent();
@@ -54,6 +67,7 @@ class BookingController extends Controller
      */
     public function edit(string $id)
     {
+        //
     }
 
     /**
@@ -61,9 +75,7 @@ class BookingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Booking::where('id', $id)->update([
-            'status' => $request->status
-        ]);
+        //
     }
 
     /**

@@ -36,7 +36,9 @@ const HomeHero = () => {
 
         <div className="flex gap-4 self-center mt-10 text-base font-bold leading-6 text-right">
 
-          <button className="capitalize justify-center px-8 py-5 text-white bg-rose-700 border-2 border-rose-700 border-solid rounded-[118px] hover:bg-transparent hover:text-rose-700 duration-75 max-md:px-5">
+          <button
+            className="capitalize justify-center px-8 py-5 text-white bg-rose-700 border-2 border-rose-700 border-solid rounded-[118px] hover:bg-transparent hover:text-rose-700 duration-75 max-md:px-5"
+          >
             book a table
           </button>
 

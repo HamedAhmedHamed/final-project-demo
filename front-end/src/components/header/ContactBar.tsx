@@ -8,7 +8,7 @@ const ContactBar = () => {
 
         <ul className="flex gap-5 justify-between my-auto text-base leading-6 text-stone-50 max-sm:justify-evenly">
           <li className="flex gap-2">
-            <HiOutlinePhone className="mt-auto" size={18}/>
+            <HiOutlinePhone className="mt-auto" size={18} />
             <p className="max-sm:text-sm">(414) 857 - 0107</p>
           </li>
 
@@ -19,27 +19,27 @@ const ContactBar = () => {
         </ul>
 
         <ul className="flex gap-2 max-sm:justify-evenly">
-          <li className="flex items-center justify-center w-7 h-7 bg-zinc-600 hover:bg-zinc-500 rounded-full">
-            <a href="" target="_blank">
+          <li>
+            <a href="" className="flex items-center justify-center w-7 h-7 bg-zinc-600 hover:bg-zinc-500 rounded-full" target="_blank">
               <FaTwitter size={13} className="text-white" />
             </a>
           </li>
 
-          <li className="flex items-center justify-center w-7 h-7 bg-zinc-600 hover:bg-zinc-500 rounded-full">
-            <a href="" target="_blank">
-              <FaFacebookF size={13} className="text-white"/>
+          <li>
+            <a href="" className="flex items-center justify-center w-7 h-7 bg-zinc-600 hover:bg-zinc-500 rounded-full" target="_blank">
+              <FaFacebookF size={13} className="text-white" />
             </a>
           </li>
 
-          <li className="flex items-center justify-center w-7 h-7 bg-zinc-600 hover:bg-zinc-500 rounded-full">
-            <a href="" target="_blank">
-              <FaInstagram size={13} className="text-white"/>
+          <li >
+            <a href="" className="flex items-center justify-center w-7 h-7 bg-zinc-600 hover:bg-zinc-500 rounded-full" target="_blank">
+              <FaInstagram size={13} className="text-white" />
             </a>
           </li>
 
-          <li className="flex items-center justify-center w-7 h-7 bg-zinc-600 hover:bg-zinc-500 rounded-full">
-            <a href="" target="_blank">
-              <FaGithub size={13} className="text-white"/>
+          <li >
+            <a href="" className="flex items-center justify-center w-7 h-7 bg-zinc-600 hover:bg-zinc-500 rounded-full" target="_blank">
+              <FaGithub size={13} className="text-white" />
             </a>
           </li>
         </ul>
