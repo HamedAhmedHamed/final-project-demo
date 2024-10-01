@@ -17,6 +17,7 @@ import UserProfile from './routes/user/UserProfile.tsx'
 import AdminPanel from './routes/admin/AdminPanel.tsx'
 import ReviewBookings from './routes/admin/ReviewBookings.tsx'
 import ModifyMenu from './routes/admin/ModifyMenu.tsx'
+import { Roles } from './types/auth.interface.ts'
 
 const App = () => {
   return (
@@ -24,60 +25,60 @@ const App = () => {
       <Route element={<Layout />}>
         <Route path='/' element={<Navigate to="/home" />} />
         <Route path='/home' element={
-          <ProtectedRoute allowedModels={["guest", "user", "admin"]}>
+          <ProtectedRoute allowedModels={[Roles.guest, Roles.user, Roles.admin]}>
             <Home />
           </ProtectedRoute>}
         />
         <Route path='/about' element={
-          <ProtectedRoute allowedModels={["guest", "user", "admin"]}>
+          <ProtectedRoute allowedModels={[Roles.user, Roles.user, Roles.admin]}>
             <About />
           </ProtectedRoute>}
         />
         <Route path='/menu' element={
-          <ProtectedRoute allowedModels={["guest", "user", "admin"]}>
+          <ProtectedRoute allowedModels={[Roles.user, Roles.user, Roles.admin]}>
             <Menu />
           </ProtectedRoute>}
         />
 
         <Route path='/register' element={
-          <ProtectedRoute allowedModels={["guest"]}>
+          <ProtectedRoute allowedModels={[Roles.guest]}>
             <Register />
           </ProtectedRoute>}
         />
         <Route path='/login' element={
-          <ProtectedRoute allowedModels={["guest"]}>
+          <ProtectedRoute allowedModels={[Roles.guest]}>
             <Login />
           </ProtectedRoute>}
         />
 
         <Route path='/profile' element={
-          <ProtectedRoute allowedModels={["user"]}>
+          <ProtectedRoute allowedModels={[Roles.user]}>
             <UserProfile />
           </ProtectedRoute>}
         />
         <Route path='/book-a-table' element={
-          <ProtectedRoute allowedModels={["user"]}>
+          <ProtectedRoute allowedModels={[Roles.user]}>
             <Booking />
           </ProtectedRoute>}
         />
         <Route path='/my-bookings' element={
-          <ProtectedRoute allowedModels={["user"]}>
+          <ProtectedRoute allowedModels={[Roles.user]}>
             <MyBookings />
           </ProtectedRoute>}
         />
 
         <Route path='/admin-panel' element={
-          <ProtectedRoute allowedModels={["admin"]}>
+          <ProtectedRoute allowedModels={[Roles.admin]}>
             <AdminPanel /> 
           </ProtectedRoute>}
         />
         <Route path='/review-bookings' element={
-          <ProtectedRoute allowedModels={["admin"]}>
+          <ProtectedRoute allowedModels={[Roles.admin]}>
             <ReviewBookings />
           </ProtectedRoute>}
         />
         <Route path='/modify-menu' element={
-          <ProtectedRoute allowedModels={["admin"]}>
+          <ProtectedRoute allowedModels={[Roles.admin]}>
             <ModifyMenu />
           </ProtectedRoute>}
         />

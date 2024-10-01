@@ -93,7 +93,9 @@ const MyBookingsList = ({ role = Roles.user }: { role: Roles }) => {
                 </tbody>
 
                 {isGlobalLoading ? (
-                  <BeatLoader />
+                  <caption className="caption-bottom">
+                    <BeatLoader />
+                  </caption>
                 ) : !bookings.length && (
                   <caption className="caption-bottom py-4 text-2xl font-playfair">
                     you haven't booked yet, <Link to="/book-a-table"> book a table now </Link>

@@ -1,9 +1,10 @@
-import ModifyMenuForm from "../../components/sections/ModifyMenuForm"
+import MenuSection from "../../components/sections/MenuSection"
+import { Roles } from "../../types/auth.interface"
 
 const ModifyMenu = () => {
   return (
     <main>
-      <ModifyMenuForm />
+      <MenuSection role={Roles.admin} />
     </main>
   )
 }

@@ -65,16 +65,16 @@ export const adminNavigation: NavigationLink[] = [
     navigateTo: "/about"
   },
   {
+    label: "modify menu",
+    navigateTo: "/modify-menu"
+  },
+  {
     label: "admin panel",
     navigateTo: "/admin-panel"
   },
   {
     label: "review bookings",
     navigateTo: "/review-bookings"
-  },
-  {
-    label: "modify menu",
-    navigateTo: "/modify-menu"
   },
 ]
 
