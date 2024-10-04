@@ -19,7 +19,16 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [errors, setErrors] = useState<ValidationError["response"]["data"]["errors"] | null>(null)
   const navigate = useNavigate()
 
-  const csrf = async () => api.get("/sanctum/csrf-cookie")
+  const csrf = async () => {
+    setIsLoading(() => true)
+    try {
+      await api.get("/sanctum/csrf-cookie")
+    } catch(error) {
+      console.log(error)
+    } finally {
+      setIsLoading(() => false)
+    }
+  }
 
   const getAccessToken = () => {
     return sessionStorage.getItem("access-token")!

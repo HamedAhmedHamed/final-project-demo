@@ -7,13 +7,10 @@ import { MdOutlineTitle } from "react-icons/md";
 import { IoPricetag } from "react-icons/io5";
 import { MdCategory } from "react-icons/md";
 import { IoIosUndo } from "react-icons/io"
-import useAuthContext from "../../context/AuthContext";
-import api from "../../api/api";
-import { type MenuItem, Categories } from "../../context/MenuContext";
+import { type MenuItem, Categories, useMenu } from "../../context/MenuContext";
 
 const ModifyMenuForm = () => {
-  const { csrf, getAccessToken } = useAuthContext()
-
+  const { createMenuItem } = useMenu()
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | undefined>(undefined)
   const [menuItem, setMenuItem] = useState<MenuItem>({
@@ -53,24 +50,13 @@ const ModifyMenuForm = () => {
 
   const handleMenuItem = async (e: FormEvent) => {
     e.preventDefault()
-    await csrf()
-    try {
-      const { data } = await api.post<MenuItem>("/api/menu/store", {
-        image: menuItem.image,
-        title: menuItem.title,
-        description: menuItem.description,
-        price: menuItem.price,
-        category: menuItem.category
-      }, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${getAccessToken()}`
-        }
-      })
-      console.log(data)
-    } catch (error) {
-      console.log(error)
-    }
+    createMenuItem({
+      image: menuItem.image,
+      title: menuItem.title,
+      description: menuItem.description,
+      price: menuItem.price,
+      category: menuItem.category
+    })
   }
 
   return (

@@ -8,17 +8,20 @@ import { useSearchParams } from "react-router-dom"
 const MenuSection = ({ role = Roles.user }: { role: Roles[] | Roles }) => {
   const { menuItems, fetchMenu } = useMenu()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [activeId, setActiveId] = useState(searchParams.get('cat'))
   const category = searchParams.get('cat') as Categories
+  const [activeCategory, setActiveCategory] = useState<Categories | null>(null)
 
   useEffect(() => {
     fetchMenu()
   }, [])
 
-  const handleFetch = (cat: Categories) => {
-    setActiveId(() => cat)
-    setSearchParams({ cat })
-  }
+  useEffect(() => {
+    setActiveCategory(() => category)
+  }, [searchParams])
+  
+  // const handleFetch = (cat: Categories) => {
+  //   setSearchParams({ category })
+  // }
 
   return (
     <section className="flex flex-col justify-center bg-white">
@@ -42,9 +45,9 @@ const MenuSection = ({ role = Roles.user }: { role: Roles[] | Roles }) => {
             <li key={cat}>
               <button
                 type='button'
-                onClick={() => handleFetch(cat)}
+                onClick={() => setSearchParams({ cat })}
                 className={
-                  cat === activeId
+                  cat === activeCategory
                     ? "capitalize px-8 py-3 text-white bg-rose-700 rounded-[50px] max-md:px-5"
                     : "capitalize px-7 py-3 border border-solid border-stone-300 rounded-[50px] max-md:px-5"
                 }

@@ -74,7 +74,17 @@ class MenuItemsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = $request->validate([
+            'image' => 'mimes:png,jpg,jpeg,webp',
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'category' => 'required'
+        ]);
+
+        $menuItem = MenuItems::where('id', $id)->update($validator);
+
+        return response($menuItem);
     }
 
     /**

@@ -38,6 +38,6 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function ()
     Route::put('/bookings/confirm/{id}', [BookingController::class, "update"]);
 
     Route::post('/menu/store', [MenuItemsController::class , 'store']);
-    Route::put('/menu/update/${id}', [MenuItemsController::class , 'update']);
+    Route::put('/menu/update/{id}', [MenuItemsController::class , 'update']);
     Route::delete('/menu/destroy/${id}', [MenuItemsController::class, 'destroy']);
 });

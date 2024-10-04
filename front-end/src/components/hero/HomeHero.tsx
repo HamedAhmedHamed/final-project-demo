@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom"
 import bg from "/hero/main-hero.webp"
+import useAuthContext from "../../context/AuthContext"
+import { Roles } from "../../types/auth.interface"
 
 const HomeHero = () => {
-
-  const navigateToBooking = () => {
-
-  }
-
+  const { user } = useAuthContext()
   return (
     <section className="flex overflow-hidden relative flex-col justify-center items-center px-16 py-20 w-full min-h-[802px] max-sm:px-2 max-sm:py-0 max-md:px-5 max-md:max-w-full">
 
@@ -36,15 +34,17 @@ const HomeHero = () => {
 
         <div className="flex gap-4 self-center mt-10 text-base font-bold leading-6 text-right">
 
-          <Link
-            to="/login"
-            className="capitalize justify-center px-8 py-5 text-white bg-rose-700 border-2 border-rose-700 border-solid rounded-[118px] hover:bg-transparent hover:text-rose-700 duration-75 max-md:px-5"
-          >
-            book a table
-          </Link>
+          {user.role === Roles.admin ? null : (
+            <Link
+              to={`/${user.role === Roles.guest ? "login" : "book-a-table"}`}
+              className="capitalize justify-center px-8 py-5 text-white bg-rose-700 border-2 border-rose-700 border-solid rounded-[118px] hover:bg-transparent hover:text-rose-700 duration-75 max-md:px-5"
+            >
+              book a table
+            </Link>
+          )}
 
           <Link
-            to="/menu/?cat=all"
+            to={`/${user.role === Roles.admin ? "modify-menu" : "menu"}/?cat=all`}
             className="capitalize justify-center px-8 py-5 text-gray-900 bg-transparent border-2 border-solid border-stone-800 rounded-[118px] max-md:px-5"
           >
             explore menu
