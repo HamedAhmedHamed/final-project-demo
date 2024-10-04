@@ -36,14 +36,15 @@ const HomeHero = () => {
 
         <div className="flex gap-4 self-center mt-10 text-base font-bold leading-6 text-right">
 
-          <button
+          <Link
+            to="/login"
             className="capitalize justify-center px-8 py-5 text-white bg-rose-700 border-2 border-rose-700 border-solid rounded-[118px] hover:bg-transparent hover:text-rose-700 duration-75 max-md:px-5"
           >
             book a table
-          </button>
+          </Link>
 
           <Link
-            to="/menu"
+            to="/menu/?cat=all"
             className="capitalize justify-center px-8 py-5 text-gray-900 bg-transparent border-2 border-solid border-stone-800 rounded-[118px] max-md:px-5"
           >
             explore menu

@@ -4,31 +4,38 @@ import { TbMug } from "react-icons/tb";
 import { BiBowlRice } from "react-icons/bi";
 import { RiDrinks2Line } from "react-icons/ri";
 import { LuCakeSlice } from "react-icons/lu";
+import { Roles } from "../../types/auth.interface";
+import useAuthContext from "../../context/AuthContext";
 
 const MenuInfoSection = () => {
+	const { user } = useAuthContext()
 	const menuInfos = [
 		{
 			title: "Breakfast",
 			icon: <TbMug size={50} className="text-gray-700" />,
-			children: "In the new era of technology we look in the future with certainty and pride for our life."
+			navTo: `/${user.role === Roles.user || user.role === Roles.guest ? "menu" : "modify-menu"}/?cat=breakfast`,
+			description: "In the new era of technology we look in the future with certainty and pride for our life."
 		},
 
 		{
 			title: "Main Dishes",
 			icon: <BiBowlRice size={50} className="text-gray-700" />,
-			children: "In the new era of technology we look in the future with certainty and pride for our life."
+			navTo: `/${user.role === Roles.user || user.role === Roles.guest ? "menu" : "modify-menu"}/?cat=main-dishes`,
+			description: "In the new era of technology we look in the future with certainty and pride for our life."
 		},
 
 		{
 			title: "Drinks",
 			icon: <RiDrinks2Line size={50} className="text-gray-700" />,
-			children: "In the new era of technology we look in the future with certainty and pride for our life."
+			navTo: `/${user.role === Roles.user || user.role === Roles.guest ? "menu" : "modify-menu"}/?cat=drinks`,
+			description: "In the new era of technology we look in the future with certainty and pride for our life."
 		},
 
 		{
 			title: "Desserts",
 			icon: <LuCakeSlice size={50}className="text-gray-700" />,
-			children: "In the new era of technology we look in the future with certainty and pride for our life."
+			navTo: `/${user.role === Roles.user || user.role === Roles.guest ? "menu" : "modify-menu"}/?cat=desserts`,
+			description: "In the new era of technology we look in the future with certainty and pride for our life."
 		}
 	]
 

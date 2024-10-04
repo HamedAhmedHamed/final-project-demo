@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/menu', [MenuItemsController::class , 'index']);
+
 Route::middleware(['auth:sanctum'])->group(function ()
 {
-    Route::get("/get-bookings", [BookingController::class, "index"]);
+    Route::get('/bookings', [BookingController::class, "index"]);
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
@@ -28,13 +30,14 @@ Route::middleware(['auth:sanctum'])->group(function ()
 
 Route::middleware(['auth:sanctum', 'role:user'])->group(function ()
 {
-    Route::post("/register-book", [BookingController::class, "store"]);
+    Route::post('/bookings/store', [BookingController::class, "store"]);
 });
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function ()
 {
-    Route::put("/handle-confirmation/{id}", [BookingController::class, "update"]);
+    Route::put('/bookings/confirm/{id}', [BookingController::class, "update"]);
 
-    Route::get('/menu', [MenuItemsController::class, 'index']);
-    Route::post('/menu/store', [MenuItemsController::class, 'store']);
+    Route::post('/menu/store', [MenuItemsController::class , 'store']);
+    Route::put('/menu/update/${id}', [MenuItemsController::class , 'update']);
+    Route::delete('/menu/destroy/${id}', [MenuItemsController::class, 'destroy']);
 });

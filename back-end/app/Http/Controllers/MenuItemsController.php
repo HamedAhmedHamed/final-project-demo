@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MenuItems;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class MenuItemsController extends Controller
 {
@@ -12,7 +14,8 @@ class MenuItemsController extends Controller
      */
     public function index()
     {
-        //
+        $menuItems = MenuItems::all();
+        return response()->json($menuItems);
     }
 
     /**
@@ -36,22 +39,18 @@ class MenuItemsController extends Controller
             'category' => 'required'
         ]);
 
-        if ($request->has('image')) {
-            $image = $request->file('image');
-            $ext = $image->getClientOriginalExtension();
-
-            $imageName = time().''.$ext;
-            $path = '/uploads/menu-items';
-
-            $image->move($path, $imageName);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $imageUrl = Storage::url($imagePath);
+            $data = MenuItems::create([
+                ...$validator,
+                'image' => url($imageUrl)
+            ]);
+            return response($data, Response::HTTP_CREATED);
         }
 
-        MenuItems::create([
-            'image' => $path . $imageName,
-            ...$validator
-        ]);
+        //error handling
 
-        return response()->noContent();
     }
 
     /**

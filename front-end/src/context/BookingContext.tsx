@@ -15,7 +15,7 @@ export const BookingProvider = ({ children }: PropsWithChildren) => {
     setIsGlobalLoading(() => true)
     await csrf()
     try {
-      const { data } = await api.get<Booking[]>("/api/get-bookings", {
+      const { data } = await api.get<Booking[]>("/api/bookings", {
         headers: {
           Authorization: `Bearer ${getAccessToken()}`
         }
@@ -36,7 +36,7 @@ export const BookingProvider = ({ children }: PropsWithChildren) => {
     await csrf()
 
     try {
-      await api.put(`/api/handle-confirmation/${id}`, { status: statusRef.current }, {
+      await api.put(`/api/bookings/confirm/${id}`, { status: statusRef.current }, {
         headers: {
           Authorization: `Bearer ${getAccessToken()}`
         }

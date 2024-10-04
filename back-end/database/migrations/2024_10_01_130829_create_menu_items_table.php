@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->decimal('price');
-            $table->enum('category', ['all', 'breakfast', 'main-dishes', 'drinks', 'desserts'])->default('all');
+            $table->enum('category', ['breakfast', 'main-dishes', 'drinks', 'desserts'])->nullable();
             $table->timestamps();
         });
     }

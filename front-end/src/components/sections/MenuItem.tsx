@@ -1,31 +1,51 @@
 import { Roles } from "../../types/auth.interface"
 // import { ChangeEvent, useState } from "react"
-import eggs from "/menu-items/fried-eggs.webp"
+import { FaHashtag } from "react-icons/fa"
 import { MdEdit } from "react-icons/md"
+import { FaTrashAlt } from "react-icons/fa"
+import { type MenuItem } from "../../context/MenuContext"
 
-const MenuItem = ({ role }: { role: Roles }) => {
+const MenuItem = ({ role, item }: { role: Roles | Roles[], item: MenuItem }) => {
   return (
     <div className="flex flex-col max-md:ml-0 max-md:w-full">
       {role === Roles.admin ? (
-        <form className="flex flex-col grow items-center pb-9 w-full font-bold text-center bg-white rounded-xl border-2 border-solid border-stone-300 max-md:mt-6">
+        <form
+          encType="multipart"
+          className="flex flex-col grow items-center pb-9 w-full font-bold text-center bg-white rounded-xl border-2 border-solid border-stone-300 max-md:mt-6"
+        >
           <div className="relative w-full flex justify-center items-center">
             <img
               loading="eager"
-              src={eggs}
+              src={String(item.image)}
               className="w-full self-stretch aspect-[1.33]"
             />
-            <span
-              className="absolute top-4 right-2 flex flex-center justify-center cursor-pointer w-8 h-8 bg-white hover:bg-zinc-200 rounded-full"
+            <div className="absolute top-4 right-2 h-20 flex flex-col justify-between">
+              <span
+                className="flex justify-center cursor-pointer w-8 h-8 bg-rose-700 hover:bg-rose-800 rounded-full"
+              >
+                <FaTrashAlt size={16} className="my-auto text-white" />
+              </span>
+
+              <span
+                className="flex justify-center cursor-pointer w-8 h-8 bg-white hover:bg-zinc-200 rounded-full"
+              >
+                <MdEdit size={20} className="my-auto text-zinc-600" />
+              </span>
+            </div>
+
+            <div
+              className="absolute top-4 left-2 flex justify-center items-center w-8 h-8 bg-zinc-600 hover:bg-zinc-700 rounded-full"
             >
-              <MdEdit size={20} className="my-auto text-zinc-600" />
-            </span>
+              <FaHashtag className="my-auto text-white" size={12} />
+              <span className="text-white">{item.id}</span>
+            </div>
           </div>
           <label className="relative w-full flex justify-center items-center">
             <input
               type="text"
               className="mt-8 mx-4 w-full text-2xl text-center tracking-tighter text-rose-700 border border-dashed border-stone-300 rounded-lg"
               disabled
-              value={"$ 9.99"}
+              value={`$ ${item.price}`}
             />
             <span
               className="absolute top-4 right-2 flex flex-center justify-center cursor-pointer w-8 h-8 bg-zinc-600 hover:bg-zinc-500 rounded-full"
@@ -39,7 +59,7 @@ const MenuItem = ({ role }: { role: Roles }) => {
               type="text"
               className="mt-6 mx-4 w-full text-xl text-center leading-7 text-stone-800 border border-dashed border-stone-300 rounded-lg"
               disabled
-              value={"Fried Eggs"}
+              value={item.title}
               onChange={() => null}
             />
             <span
@@ -54,7 +74,7 @@ const MenuItem = ({ role }: { role: Roles }) => {
               className="mt-10 mx-4 p-2 rounded-lg w-full text-base leading-6 text-stone-700 border border-dashed border-stone-300"
               rows={3}
               disabled
-              value={"Made with eggs, lettuce, salt, oil and other ingredients."}
+              value={item.description}
               onChange={() => null}
             ></textarea>
 
@@ -77,17 +97,17 @@ const MenuItem = ({ role }: { role: Roles }) => {
         <div className="flex flex-col grow items-center pb-9 w-full font-bold text-center bg-white rounded-xl border-2 border-solid border-stone-300 max-md:mt-6">
           <img
             loading="eager"
-            srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/0d5d81bfb8f8d7ca13a7955331864b93dd8e0792aea7407e4be58d0d3fefc1f0?apiKey=dc98b0512cdc414dbb547f3d5242c1bd&&apiKey=dc98b0512cdc414dbb547f3d5242c1bd&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/0d5d81bfb8f8d7ca13a7955331864b93dd8e0792aea7407e4be58d0d3fefc1f0?apiKey=dc98b0512cdc414dbb547f3d5242c1bd&&apiKey=dc98b0512cdc414dbb547f3d5242c1bd&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/0d5d81bfb8f8d7ca13a7955331864b93dd8e0792aea7407e4be58d0d3fefc1f0?apiKey=dc98b0512cdc414dbb547f3d5242c1bd&&apiKey=dc98b0512cdc414dbb547f3d5242c1bd&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/0d5d81bfb8f8d7ca13a7955331864b93dd8e0792aea7407e4be58d0d3fefc1f0?apiKey=dc98b0512cdc414dbb547f3d5242c1bd&&apiKey=dc98b0512cdc414dbb547f3d5242c1bd&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/0d5d81bfb8f8d7ca13a7955331864b93dd8e0792aea7407e4be58d0d3fefc1f0?apiKey=dc98b0512cdc414dbb547f3d5242c1bd&&apiKey=dc98b0512cdc414dbb547f3d5242c1bd&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/0d5d81bfb8f8d7ca13a7955331864b93dd8e0792aea7407e4be58d0d3fefc1f0?apiKey=dc98b0512cdc414dbb547f3d5242c1bd&&apiKey=dc98b0512cdc414dbb547f3d5242c1bd&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/0d5d81bfb8f8d7ca13a7955331864b93dd8e0792aea7407e4be58d0d3fefc1f0?apiKey=dc98b0512cdc414dbb547f3d5242c1bd&&apiKey=dc98b0512cdc414dbb547f3d5242c1bd&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/0d5d81bfb8f8d7ca13a7955331864b93dd8e0792aea7407e4be58d0d3fefc1f0?apiKey=dc98b0512cdc414dbb547f3d5242c1bd&&apiKey=dc98b0512cdc414dbb547f3d5242c1bd"
+            src={String(item.image)}
             className="self-stretch w-full aspect-[1.33]"
           />
           <p className="mt-8 text-2xl tracking-tighter text-rose-700">
-            $ 9.99
+            {`$ ${item.price}`}
           </p>
-          <h3 className="mt-4 text-xl leading-7 text-stone-800">
-            Fried Eggs
+          <h3 className="mt-4 text-xl leading-7 text-stone-800 capitalize">
+            {item.title}
           </h3>
           <p className="mt-4 text-base leading-6 text-stone-700 w-[246px]">
-            Made with eggs, lettuce, salt, oil and other ingredients.
+            {item.description}
           </p>
         </div >
       )}

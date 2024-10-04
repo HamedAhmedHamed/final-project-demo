@@ -15,7 +15,7 @@ export const guestNavigation: NavigationLink[] = [
   },
   {
     label: "menu",
-    navigateTo: "/menu"
+    navigateTo: "/menu/?cat=all"
   },
   {
     label: "login",
@@ -42,7 +42,7 @@ export const userNavigation: NavigationLink[] = [
   },
   {
     label: "menu",
-    navigateTo: "/menu"
+    navigateTo: "/menu/?cat=all"
   },
   {
     label: "book a table",
@@ -66,7 +66,7 @@ export const adminNavigation: NavigationLink[] = [
   },
   {
     label: "modify menu",
-    navigateTo: "/modify-menu"
+    navigateTo: "/modify-menu/?cat=all"
   },
   {
     label: "admin panel",

@@ -31,7 +31,7 @@ const BookingForm = () => {
     setIsLoading(() => true)
     await csrf()
     try {
-      const { data } = await api.post<Booking>("/api/register-book", {
+      const { data } = await api.post<Booking>("/api/bookings/store", {
         "registration_date": booking.registration_date,
         "registration_time": booking.registration_time,
         "name": booking.name,

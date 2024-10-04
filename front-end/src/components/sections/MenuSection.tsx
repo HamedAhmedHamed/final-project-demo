@@ -1,21 +1,23 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Roles } from "../../types/auth.interface"
 import MenuItem from "./MenuItem"
 import ModifyMenuForm from "./ModifyMenuForm"
+import { Categories, useMenu } from "../../context/MenuContext"
+import { useSearchParams } from "react-router-dom"
 
-const MenuSection = ({ role = Roles.user }: { role: Roles }) => {
-  const [activeId, setActiveId] = useState(0)
+const MenuSection = ({ role = Roles.user }: { role: Roles[] | Roles }) => {
+  const { menuItems, fetchMenu } = useMenu()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [activeId, setActiveId] = useState(searchParams.get('cat'))
+  const category = searchParams.get('cat') as Categories
 
-  const buttons = [
-    "all",
-    'breakfast',
-    'main dishes',
-    'drinks',
-    'desserts'
-  ]
+  useEffect(() => {
+    fetchMenu()
+  }, [])
 
-  const handleFetch = (id: number) => {
-    setActiveId(() => id)
+  const handleFetch = (cat: Categories) => {
+    setActiveId(() => cat)
+    setSearchParams({ cat })
   }
 
   return (
@@ -36,18 +38,18 @@ const MenuSection = ({ role = Roles.user }: { role: Roles }) => {
 
         <ul className="flex gap-4 mt-12 text-base font-bold leading-6 text-center text-stone-800 max-md:flex-wrap max-md:mt-10">
 
-          {buttons.map((label, i) => (
-            <li key={i}>
+          {Object.values(Categories).map((cat) => (
+            <li key={cat}>
               <button
                 type='button'
-                onClick={() => handleFetch(i)}
+                onClick={() => handleFetch(cat)}
                 className={
-                  i === activeId
+                  cat === activeId
                     ? "capitalize px-8 py-3 text-white bg-rose-700 rounded-[50px] max-md:px-5"
                     : "capitalize px-7 py-3 border border-solid border-stone-300 rounded-[50px] max-md:px-5"
                 }
               >
-                {label}
+                {cat.replace('-', ' ')}
               </button>
             </li>
           ))}
@@ -60,7 +62,9 @@ const MenuSection = ({ role = Roles.user }: { role: Roles }) => {
 
         <div className="mt-24 mb-7 w-full max-w-[1296px] max-md:mt-10 max-md:max-w-full">
           <div className="grid grid-cols-4 gap-x-5 gap-y-7 max-md:grid-cols-3 max-sm:grid-cols-1">
-            <MenuItem role={role} />
+            {menuItems?.filter(item => category === Categories.all ? item : item.category === category).map((item) => (
+              <MenuItem key={item.id} item={item} role={role} />
+            ))}
           </div>
         </div>
       </div>

@@ -30,12 +30,12 @@ const App = () => {
           </ProtectedRoute>}
         />
         <Route path='/about' element={
-          <ProtectedRoute allowedModels={[Roles.user, Roles.user, Roles.admin]}>
+          <ProtectedRoute allowedModels={[Roles.guest, Roles.user, Roles.admin]}>
             <About />
           </ProtectedRoute>}
         />
         <Route path='/menu' element={
-          <ProtectedRoute allowedModels={[Roles.user, Roles.user, Roles.admin]}>
+          <ProtectedRoute allowedModels={[Roles.guest, Roles.user]}>
             <Menu />
           </ProtectedRoute>}
         />
