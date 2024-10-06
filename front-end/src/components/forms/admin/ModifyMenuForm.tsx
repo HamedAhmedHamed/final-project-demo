@@ -57,6 +57,18 @@ const ModifyMenuForm = () => {
       price: menuItem.price,
       category: menuItem.category
     })
+    setMenuItem(() => ({
+      id: NaN,
+      image: null,
+      title: "",
+      description: "",
+      price: "",
+      category: Categories.all,
+      created_at: "",
+      updated_at: ""
+    }))
+    setFile(() => null)
+    setPreviewUrl(() => undefined)
   }
 
   return (

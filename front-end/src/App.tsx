@@ -15,7 +15,6 @@ import Booking from './routes/user/Booking.tsx'
 import MyBookings from './routes/user/MyBookings.tsx'
 import UserProfile from './routes/user/UserProfile.tsx'
 
-import AdminPanel from './routes/admin/AdminPanel.tsx'
 import ReviewBookings from './routes/admin/ReviewBookings.tsx'
 import ModifyMenu from './routes/admin/ModifyMenu.tsx'
 
@@ -67,11 +66,6 @@ const App = () => {
           </ProtectedRoute>}
         />
 
-        <Route path='/admin-panel' element={
-          <ProtectedRoute allowedModels={[Roles.admin]}>
-            <AdminPanel />
-          </ProtectedRoute>}
-        />
         <Route path='/review-bookings' element={
           <ProtectedRoute allowedModels={[Roles.admin]}>
             <ReviewBookings />

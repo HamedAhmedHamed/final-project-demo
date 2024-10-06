@@ -94,7 +94,9 @@ const MyBookingsList = ({ role = Roles.user }: { role: Roles }) => {
 
                 {isGlobalLoading ? (
                   <caption className="caption-bottom">
-                    <BeatLoader />
+                    <div>
+                      <BeatLoader />
+                    </div>
                   </caption>
                 ) : !bookings.length && (
                   <caption className="caption-bottom py-4 text-2xl font-playfair">

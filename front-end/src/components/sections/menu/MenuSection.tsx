@@ -4,9 +4,10 @@ import MenuItem from "./MenuItem"
 import ModifyMenuForm from "../../forms/admin/ModifyMenuForm"
 import { Categories, useMenu } from "../../../contexts/MenuContext"
 import { useSearchParams } from "react-router-dom"
+import { BeatLoader } from "react-spinners"
 
 const MenuSection = ({ role = Roles.user }: { role: Roles[] | Roles }) => {
-  const { menuItems, fetchMenu } = useMenu()
+  const { menuItems, fetchMenu, isLoading } = useMenu()
   const [searchParams, setSearchParams] = useSearchParams()
   const category = searchParams.get('cat') as Categories
   const [activeCategory, setActiveCategory] = useState<Categories | null>(null)
@@ -18,7 +19,7 @@ const MenuSection = ({ role = Roles.user }: { role: Roles[] | Roles }) => {
   useEffect(() => {
     setActiveCategory(() => category)
   }, [searchParams])
-  
+
   // const handleFetch = (cat: Categories) => {
   //   setSearchParams({ category })
   // }
@@ -65,10 +66,17 @@ const MenuSection = ({ role = Roles.user }: { role: Roles[] | Roles }) => {
 
         <div className="mt-24 mb-7 w-full max-w-[1296px] max-md:mt-10 max-md:max-w-full">
           <div className="grid grid-cols-4 gap-x-5 gap-y-7 max-md:grid-cols-3 max-sm:grid-cols-1">
-            {menuItems?.filter(item => category === Categories.all ? item : item.category === category).map((item) => (
-              <MenuItem key={item.id} item={item} role={role} />
-            ))}
+            {isLoading
+              ? null
+              : menuItems?.filter(item => category === Categories.all ? item : item.category === category).map((item) => (
+                <MenuItem key={item.id} item={item} role={role} />
+              ))}
           </div>
+          {isLoading ? (
+            <div className="flex justify-center">
+              <BeatLoader size={60}/>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>

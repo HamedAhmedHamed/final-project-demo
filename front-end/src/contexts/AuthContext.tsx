@@ -20,14 +20,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const navigate = useNavigate()
 
   const csrf = async () => {
-    setIsLoading(() => true)
     try {
-      const {data} = await api.get("/sanctum/csrf-cookie")
-      console.log(data)
+      await api.get("/sanctum/csrf-cookie")
     } catch(error) {
       console.log(error)
     } finally {
-      setIsLoading(() => false)
     }
   }
 

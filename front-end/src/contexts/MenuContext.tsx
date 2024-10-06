@@ -14,7 +14,7 @@ interface MenuContext {
     price: MenuItem["price"],
     category: MenuItem["category"]
   }) => Promise<void>;
-
+  deleteMenuItem: (menuItemId: MenuItem["id"]) => Promise<void>
   updateMenuItem: (menuItem: MenuItem) => Promise<void>;
 }
 
@@ -70,6 +70,7 @@ export const MenuProvider = ({ children }: PropsWithChildren) => {
         }
       })
       console.log(data)
+      await fetchMenu()
     } catch (error) {
       console.log(error)
     } finally {
@@ -88,7 +89,7 @@ export const MenuProvider = ({ children }: PropsWithChildren) => {
         category: menuItem.category
       }, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          // "Content-Type": "multipart/form-data",
           "Authorization": `Bearer ${getAccessToken()}`
         }
       })
@@ -100,12 +101,30 @@ export const MenuProvider = ({ children }: PropsWithChildren) => {
     }
   }
 
+  const deleteMenuItem = async (menuItemId: MenuItem["id"]) => {
+    setIsLoading(() => true)
+    try {
+      const { data } = await api.delete<MenuItem["id"]>(`/api/menu/delete/${menuItemId}`, {
+        headers: {
+          Authorization: `Bearer ${getAccessToken()}`
+        }
+      })
+      console.log(data)
+      await fetchMenu()
+    } catch (error) {
+      console.log(error) 
+    } finally {
+      setIsLoading(() => false)
+    }
+  }
+
   return (
     <MenuContext.Provider
       value={{
         fetchMenu,
         createMenuItem,
         updateMenuItem,
+        deleteMenuItem,
         menuItems,
         isLoading
       }}

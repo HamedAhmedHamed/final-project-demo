@@ -1,6 +1,6 @@
-import { lazy, Suspense } from "react";
-import { Outlet } from "react-router-dom";
-// import useAuthContext from "../contexts/AuthContext";
+import { lazy, Suspense, useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import useAuthContext from "../contexts/AuthContext";
 
 import SuspensedNavbar from "../components/header/navbar/SuspensedNavbar";
 import SuspensedContactbar from "../components/header/contactbar/SuspensedContactbar";
@@ -10,24 +10,24 @@ const Navbar = lazy(() => import("../components/header/navbar/Navbar"))
 const ContactBar = lazy(() => import("../components/header/contactbar/ContactBar"))
 const Footer = lazy(() => import("../components/footer/Footer"))
 
-// import { BeatLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 
 const Layout = () => {
-  // const location = useLocation()
-  // const { isLoading } = useAuthContext()
+  const location = useLocation()
+  const { isLoading } = useAuthContext()
 
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0, behavior: "smooth" })
-  // }, [location])
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [location])
 
   // stop scrolling
   return (
     <>
-      {/* {isLoading ? (
+      {isLoading ? (
         <main className="fixed z-50 inset-0 backdrop-blur-sm flex justify-center items-center">
           <BeatLoader className="" size={50} />
         </main>
-      ) : null} */}
+      ) : null}
       <header className="flex flex-col">
         <Suspense fallback={<SuspensedContactbar />}>
           <ContactBar />

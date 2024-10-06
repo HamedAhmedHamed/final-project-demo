@@ -56,11 +56,6 @@ export const navigation: NavigationLink[] = [
     roles: [Roles.admin]
   },
   {
-    label: "admin panel",
-    navigateTo: "/admin-panel",
-    roles: [Roles.admin]
-  },
-  {
     label: "review bookings",
     navigateTo: "/review-bookings",
     roles: [Roles.admin]

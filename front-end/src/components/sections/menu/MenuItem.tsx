@@ -4,12 +4,14 @@ import { FaHashtag } from "react-icons/fa"
 import { MdEdit } from "react-icons/md"
 import { FaTrashAlt } from "react-icons/fa"
 import { IoIosUndo } from "react-icons/io"
+import { Categories } from "../../../contexts/MenuContext"
 import { useMenu, type MenuItem } from "../../../contexts/MenuContext"
 
 const MenuItem = ({ role, item }: { role: Roles | Roles[], item: MenuItem }) => {
-  const { isLoading, updateMenuItem } = useMenu()
+  const { isLoading, updateMenuItem, deleteMenuItem } = useMenu()
   const [menuItem, setMenuItem] = useState<MenuItem>(item)
   const [canSubmit, setCanSubmit] = useState<boolean>(false)
+  const [activeCategory, setActiveCategory] = useState<number>(0)
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const priceRef = useRef<HTMLInputElement | null>(null)
@@ -58,6 +60,16 @@ const MenuItem = ({ role, item }: { role: Roles | Roles[], item: MenuItem }) => 
     }
   }
 
+  const handleCategoryChange = (cat: Categories, id: number) => {
+    setActiveCategory(id)
+    setMenuItem(() => ({ ...menuItem, category: cat }))
+    setCanSubmit(() => true)
+  }
+
+  const handleDeleteMenuItem = (id: MenuItem["id"]) => {
+    deleteMenuItem(id)
+  }
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     setMenuItem((item) => ({ ...item, image: file ?? item.image }))
@@ -79,11 +91,11 @@ const MenuItem = ({ role, item }: { role: Roles | Roles[], item: MenuItem }) => 
               className="w-full self-stretch aspect-[1.33]"
             />
 
-
             <div className="absolute top-4 right-2 h-20 flex flex-col justify-between">
               <button
                 type="button"
                 disabled={isLoading}
+                onClick={() => handleDeleteMenuItem(item.id)}
                 className="flex justify-center w-8 h-8 bg-rose-700 hover:bg-rose-800 rounded-full"
               >
                 <FaTrashAlt size={16} className="my-auto text-white" />
@@ -120,6 +132,21 @@ const MenuItem = ({ role, item }: { role: Roles | Roles[], item: MenuItem }) => 
               <FaHashtag className="my-auto text-white" size={12} />
               <span className="text-white">{menuItem.id}</span>
             </div>
+          </div>
+
+          <div className="mt-6 mx-2 flex justify-start items-center gap-2 flex-wrap">
+            {Object.values(Categories).filter(cat => cat !== Categories.all).map((cat, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => handleCategoryChange(cat, i)}
+                className={i === activeCategory
+                  ? "text-nowrap px-2 py-1 border border-rose-600 bg-rose-600 text-white rounded-2xl"
+                  : "text-nowrap px-2 py-1 border-stone-600 border text-stone-600 rounded-2xl"}
+              >
+                {cat.replace("-", " ")}
+              </button>
+            ))}
           </div>
 
           <label htmlFor="menu-item-price" className="relative w-full flex justify-center items-center">
