@@ -75,14 +75,14 @@ class MenuItemsController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = $request->validate([
-            'image' => 'mimes:png,jpg,jpeg,webp',
+            // 'image' => [['mimes:png,jpg,jpeg,webp']],
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
             'category' => 'required'
         ]);
 
-        $menuItem = MenuItems::where('id', $id)->update($validator);
+        $menuItem = MenuItems::where('id', $id)->update($request);
 
         return response($menuItem);
     }
@@ -92,6 +92,13 @@ class MenuItemsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $menuItem = MenuItems::where('id', $id)->first();
+        $imageUrl = $menuItem->image;
+        $imagePath = str_replace('/storage/', '', parse_url($imageUrl, PHP_URL_PATH));
+        if(Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('public')->delete($imagePath);
+        }
+        $menuItem->delete();
+        return response($menuItem);
     }
 }

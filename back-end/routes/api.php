@@ -39,5 +39,5 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function ()
 
     Route::post('/menu/store', [MenuItemsController::class , 'store']);
     Route::put('/menu/update/{id}', [MenuItemsController::class , 'update']);
-    Route::delete('/menu/destroy/${id}', [MenuItemsController::class, 'destroy']);
+    Route::delete('/menu/delete/{id}', [MenuItemsController::class, 'destroy']);
 });
