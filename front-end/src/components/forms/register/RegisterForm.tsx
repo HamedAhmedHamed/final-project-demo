@@ -4,8 +4,14 @@ import { Roles, RegisteredUser } from "../../../types/auth.interface"
 import { Link } from "react-router-dom"
 
 const RegisterForm = () => {
+<<<<<<< HEAD:front-end/src/components/forms/register/RegisterForm.tsx
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
   const [user, setUser] = useState<RegisteredUser>({
+=======
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  const [user, setUser] = useState({
+>>>>>>> bdc8ba608b140c27cb1e1ed73e06234b43c31014:front-end/src/components/sections/RegisterForm.jsx
     name: "",
     role: Roles.user,
     email: "",
@@ -13,7 +19,15 @@ const RegisterForm = () => {
     password_confirmation: ""
   })
 
+<<<<<<< HEAD:front-end/src/components/forms/register/RegisterForm.tsx
   const { register } = useAuthContext()
+=======
+  const {
+    register,
+    isLoading,
+    errors
+  } = useAuthContext()
+>>>>>>> bdc8ba608b140c27cb1e1ed73e06234b43c31014:front-end/src/components/sections/RegisterForm.jsx
 
   const handleRoleChange = () => {
     setIsAdmin(prev => !prev)
@@ -36,13 +50,18 @@ const RegisterForm = () => {
         register as, <span className="text-8xl text-rose-700">{isAdmin ? "admin" : "user"}</span>
       </h1>
 
+<<<<<<< HEAD:front-end/src/components/forms/register/RegisterForm.tsx
       <form onSubmit={handleRegister} className="flex z-10 flex-col gap-5 text-stone-800 px-12 py-12 mt-20 -mb-96 max-w-full text-base leading-6 bg-white rounded-2xl border border-white border-solid shadow-2xl w-[812px] max-md:px-5 max-md:mt-10 max-md:mb-2.5">
+=======
+      <form onSubmit={handleRegister} className="flex z-10 flex-col gap-5 text-stone-800 px-12 py-12 mt-20 -mb-80 max-w-full text-base leading-6 bg-white rounded-2xl border border-white border-solid shadow-2xl w-[812px] max-md:px-5 max-md:mt-10 max-md:mb-2.5">
+>>>>>>> bdc8ba608b140c27cb1e1ed73e06234b43c31014:front-end/src/components/sections/RegisterForm.jsx
 
         <div className="flex flex-col w-full max-md:w-full">
-          <label htmlFor="name" className='capitalize font-bold'>name</label>
+          <label htmlFor="name" className='capitalize font-bold ml-1'>name</label>
           <input
             id='name'
             type="text"
+            disabled={isLoading}
             value={user.name}
             onChange={(e) => setUser({ ...user, name: e.target.value })}
             placeholder="Enter Your Name"
@@ -51,39 +70,54 @@ const RegisterForm = () => {
             required
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
           />
+          
+          {errors.name && errors.name.map((e, index) => (
+            <p key={index} className="text-lg text-rose-700 py-1 ml-1">{e}</p>
+          ))}
         </div>
 
         <div className="flex flex-col w-full max-md:w-full">
-          <label htmlFor="email" className='capitalize font-bold'>email</label>
+          <label htmlFor="email" className='capitalize font-bold ml-1'>email</label>
           <input
             id='email'
             type="email"
+            disabled={isLoading}
             value={user.email}
             onChange={(e) => setUser({ ...user, email: e.target.value })}
             placeholder="Enter You Email"
             required
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
           />
+          
+          {errors.email && errors.email.map((e, index) => (
+            <p key={index} className="text-lg text-rose-700 py-1 ml-1">{e}</p>
+          ))}
         </div>
 
         <div className="flex flex-col w-full max-md:w-full">
-          <label htmlFor="password" className="capitalize font-bold">password</label>
+          <label htmlFor="password" className="capitalize font-bold ml-1">password</label>
           <input
             id="password"
             type="password"
+            disabled={isLoading}
             value={user.password}
             onChange={(e) => setUser({ ...user, password: e.target.value })}
             placeholder="Enter Your Password"
             required
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
           />
+
+          {errors.password && errors.password.map((e, index) => (
+            <p key={index} className="text-lg text-rose-700 py-1 ml-1">{e}</p>
+          ))}
         </div>
 
         <div className="flex flex-col w-full max-md:w-full">
-          <label htmlFor="repeat-password" className="capitalize font-bold">repeat password</label>
+          <label htmlFor="repeat-password" className="capitalize font-bold ml-1">repeat password</label>
           <input
             id="repeat-password"
             type="password"
+            disabled={isLoading}
             value={user.password_confirmation}
             onChange={(e) => setUser({ ...user, password_confirmation: e.target.value })}
             placeholder="Please Repeat Your Password"
@@ -106,9 +140,22 @@ const RegisterForm = () => {
             <input
               id="checkAdmin"
               type="checkbox"
+<<<<<<< HEAD:front-end/src/components/forms/register/RegisterForm.tsx
               checked={user.role === Roles.admin}
               onChange={handleRoleChange}
               className="p-2 w-4 h-4"
+=======
+              className="p-2 w-4 h-4"
+              checked={isAdmin}
+              onChange={() => {
+                setIsAdmin(prev => !prev)
+                if (!isAdmin) {
+                  setUser(() => ({ ...user, role: "admin"}))
+                } else {
+                  setUser(() => ({ ...user, role: "user"}))
+                }
+              }}
+>>>>>>> bdc8ba608b140c27cb1e1ed73e06234b43c31014:front-end/src/components/sections/RegisterForm.jsx
             />
             <label htmlFor="checkAdmin" className="ml-1 p-2 capitalize">register as admin</label>
           </div>

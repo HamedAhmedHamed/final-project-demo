@@ -8,7 +8,11 @@ const LoginForm = () => {
     password: ""
   })
 
+<<<<<<< HEAD:front-end/src/components/forms/login/LoginForm.tsx
   const { isLoading, login } = useAuthContext()
+=======
+  const { errors, isLoading, login } = useAuthContext()
+>>>>>>> bdc8ba608b140c27cb1e1ed73e06234b43c31014:front-end/src/components/sections/LoginForm.jsx
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -28,29 +32,37 @@ const LoginForm = () => {
       >
 
         <div className="flex flex-col w-full max-md:w-full">
-          <label htmlFor="email" className='capitalize font-bold'>email</label>
+          <label htmlFor="email" className='capitalize font-bold ml-1'>email</label>
           <input
             id='email'
             type="email"
             required
-            disabled={isLoading ? true : false}
+            disabled={isLoading}
             value={user.email}
             onChange={(e) => setUser(() => ({ ...user, email: e.target.value }))}
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
           />
+
+          {errors.email && errors.email.map((e, index) => (
+            <p key={index} className="text-lg text-rose-700 py-1 ml-1">{e}</p>
+          ))}
         </div>
 
         <div className="flex flex-col w-full max-md:w-full">
-          <label htmlFor="password" className="capitalize font-bold">password</label>
+          <label htmlFor="password" className="capitalize font-bold ml-1">password</label>
           <input
             id="password"
             type="password"
             required
-            disabled={isLoading ? true : false}
+            disabled={isLoading}
             value={user.password}
             onChange={(e) => setUser(() => ({ ...user, password: e.target.value }))}
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
           />
+
+          {errors.password && errors.password.map((e, index) => (
+            <p key={index} className="text-lg text-rose-700 py-1 ml-1">{e}</p>
+          ))}
         </div>
 
         <button
