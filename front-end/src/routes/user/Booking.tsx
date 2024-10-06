@@ -1,5 +1,5 @@
-import BookingForm from "../../components/sections/BookingForm"
-import mapBg from "/sections/map.webp"
+import BookingForm from "../../components/forms/booking/BookingForm"
+import mapBg from "/images/sections/map.webp"
 
 const Booking = () => {
   return (

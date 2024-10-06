@@ -1,7 +1,7 @@
-import MenuSection from '../../components/sections/MenuSection'
-import Brands from '../../components/sections/Brands'
+import MenuSection from '../../components/sections/menu/MenuSection'
+import Brands from '../../components/sections/menu/Brands'
 import { Roles } from '../../types/auth.interface'
-import { MenuProvider } from '../../context/MenuContext'
+import { MenuProvider } from '../../contexts/MenuContext'
 
 const Menu = () => {
   return (

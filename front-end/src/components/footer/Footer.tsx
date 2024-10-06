@@ -1,16 +1,15 @@
-import eggs from "/footer/eggs.webp"
-import chips from "/footer/chips.webp"
-import salad from "/footer/salad.webp"
-import pancake from "/footer/pancake.webp"
-import logo from "/logo/white-japanese-food.svg"
+import eggs from "/images/footer/eggs.webp"
+import chips from "/images/footer/chips.webp"
+import salad from "/images/footer/salad.webp"
+import pancake from "/images/footer/pancake.webp"
+import logo from "/images/logo/white-japanese-food.svg"
 
 import { FaFacebookF, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react"
 
-import { guestNavigation, userNavigation, adminNavigation } from "../header/NavBar"
-import useAuthContext from "../../context/AuthContext"
-import { Roles } from "../../types/auth.interface"
+import { navigation } from "../header/navbar/Navbar"
+import useAuthContext from "../../contexts/AuthContext"
 
 const Footer = () => {
 	const [date, setDate] = useState<number | null>(null)
@@ -73,50 +72,20 @@ const Footer = () => {
 							<div className="font-bold text-white">Pages</div>
 
 							<ul className="flex flex-col mt-8 text-stone-300">
-								{(user.role === Roles.guest)
-									? guestNavigation.map((link, i) => (
-										<li key={i} className="mt-5">
-											<NavLink
-												to={link.navigateTo}
-												className={({ isActive }) => (
-													isActive
-														? "capitalize"
-														: "capitalize"
-												)}
-											>
-												{link.label}
-											</NavLink>
-										</li>
-									))
-									: (user.role === Roles.user)
-										? userNavigation.map((link, i) => (
-											<li key={i} className="mt-5">
-												<NavLink
-													to={link.navigateTo}
-													className={({ isActive }) => (
-														isActive
-															? "capitalize"
-															: "capitalize"
-													)}
-												>
-													{link.label}
-												</NavLink>
-											</li>
-										))
-										: adminNavigation.map((link, i) => (
-											<li key={i} className="mt-5">
-												<NavLink
-													to={link.navigateTo}
-													className={({ isActive }) => (
-														isActive
-															? "capitalize"
-															: "capitalize"
-													)}
-												>
-													{link.label}
-												</NavLink>
-											</li>
-										))}
+								{navigation.filter((nav) => nav.roles.includes(user.role)).map((link, i) => (
+									<li key={i} className="mt-5">
+										<NavLink
+											to={link.navigateTo}
+											className={({ isActive }) => (
+												isActive
+													? "capitalize"
+													: "capitalize"
+											)}
+										>
+											{link.label}
+										</NavLink>
+									</li>
+								))}
 							</ul>
 						</nav>
 					</div>

@@ -1,14 +1,20 @@
-import ContactBar from "../components/header/ContactBar";
-import NavBar from "../components/header/NavBar";
-import Footer from "../components/footer/Footer"
-import { Outlet, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import useAuthContext from "../context/AuthContext";
-import { BeatLoader } from "react-spinners";
+import { lazy, Suspense } from "react";
+import { Outlet } from "react-router-dom";
+// import useAuthContext from "../contexts/AuthContext";
+
+import SuspensedNavbar from "../components/header/navbar/SuspensedNavbar";
+import SuspensedContactbar from "../components/header/contactbar/SuspensedContactbar";
+import SuspensedFooter from "../components/footer/SuspensedFooter";
+
+const Navbar = lazy(() => import("../components/header/navbar/Navbar"))
+const ContactBar = lazy(() => import("../components/header/contactbar/ContactBar"))
+const Footer = lazy(() => import("../components/footer/Footer"))
+
+// import { BeatLoader } from "react-spinners";
 
 const Layout = () => {
   // const location = useLocation()
-  const { isLoading } = useAuthContext()
+  // const { isLoading } = useAuthContext()
 
   // useEffect(() => {
   //   window.scrollTo({ top: 0, behavior: "smooth" })
@@ -17,20 +23,27 @@ const Layout = () => {
   // stop scrolling
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <main className="fixed z-50 inset-0 backdrop-blur-sm flex justify-center items-center">
           <BeatLoader className="" size={50} />
         </main>
-      ) : null}
+      ) : null} */}
       <header className="flex flex-col">
-        <ContactBar />
-        < NavBar />
+        <Suspense fallback={<SuspensedContactbar />}>
+          <ContactBar />
+        </Suspense>
+
+        <Suspense fallback={<SuspensedNavbar />}>
+          <Navbar />
+        </Suspense>
       </header >
 
       <Outlet />
 
       <footer className="flex justify-center items-center px-16 py-20 bg-zinc-700 max-md:px-5 max-md:py-7">
-        <Footer />
+        <Suspense fallback={<SuspensedFooter />}>
+          <Footer />
+        </Suspense>
       </footer>
     </>
   )

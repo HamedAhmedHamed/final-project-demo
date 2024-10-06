@@ -1,23 +1,23 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { Roles } from './types/auth.interface.ts'
 
 import Layout from './layouts/Layout.tsx'
-import ProtectedRoute from './components/ProtectedRoute.tsx'
+import ProtectedRoute from './utils/ProtectedRoute.tsx'
 
 import Home from './routes/shared/Home.tsx'
 import About from './routes/shared/About.tsx'
 import Menu from './routes/shared/Menu.tsx'
-// import NotFound from './routes/NotFound.jsx'
 
-import Booking from './routes/user/Booking.tsx'
 import Login from './routes/guest/Login.tsx'
 import Register from './routes/guest/Register.tsx'
+
+import Booking from './routes/user/Booking.tsx'
 import MyBookings from './routes/user/MyBookings.tsx'
 import UserProfile from './routes/user/UserProfile.tsx'
 
 import AdminPanel from './routes/admin/AdminPanel.tsx'
 import ReviewBookings from './routes/admin/ReviewBookings.tsx'
 import ModifyMenu from './routes/admin/ModifyMenu.tsx'
-import { Roles } from './types/auth.interface.ts'
 
 const App = () => {
   return (
@@ -69,7 +69,7 @@ const App = () => {
 
         <Route path='/admin-panel' element={
           <ProtectedRoute allowedModels={[Roles.admin]}>
-            <AdminPanel /> 
+            <AdminPanel />
           </ProtectedRoute>}
         />
         <Route path='/review-bookings' element={

@@ -1,4 +1,4 @@
-import EditUser from "../../components/sections/EditUser"
+import EditUser from "../../components/forms/user/EditUser"
 
 const UserProfile = () => {
   return (

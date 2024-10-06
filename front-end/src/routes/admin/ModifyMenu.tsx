@@ -1,5 +1,5 @@
-import MenuSection from "../../components/sections/MenuSection"
-import { MenuProvider } from "../../context/MenuContext"
+import MenuSection from "../../components/sections/menu/MenuSection"
+import { MenuProvider } from "../../contexts/MenuContext"
 import { Roles } from "../../types/auth.interface"
 
 const ModifyMenu = () => {

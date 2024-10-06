@@ -1,5 +1,5 @@
-import MyBookingsList from "../../components/sections/MyBookingsList"
-import { BookingProvider } from "../../context/BookingContext"
+import MyBookingsList from "../../components/sections/user/MyBookingsList"
+import { BookingProvider } from "../../contexts/BookingContext"
 import { Roles } from "../../types/auth.interface"
 
 MyBookingsList

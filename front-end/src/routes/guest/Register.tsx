@@ -1,10 +1,15 @@
-import RegisterForm from "../../components/sections/RegisterForm.tsx"
-import bg from "/hero/main-hero.webp"
+import { lazy, Suspense } from "react"
+import bg from "/images/hero/main-hero.webp"
+import SuspensedRegisterForm from "../../components/forms/register/SuspensedRegisterForm"
+const RegisterForm = lazy(() => import("../../components/forms/register/RegisterForm"))
 
 const Register = () => {
   return (
     <main>
-      <RegisterForm />
+      <Suspense fallback={<SuspensedRegisterForm />}>
+        <RegisterForm />
+      </Suspense>
+
       <img
         src={bg}
         loading="eager"

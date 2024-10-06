@@ -1,6 +1,6 @@
-import AboutSection from "../../components/sections/AboutSection"
-import BenefitsSection from "../../components/sections/BenefitsSection"
-import Testimonails from "../../components/sections/Testimonails"
+import AboutSection from "../../components/sections/home/more-about-us/AboutSection"
+import BenefitsSection from "../../components/sections/shared/benefits/BenefitsSection"
+import Testimonails from "../../components/sections/shared/testimonials/Testimonials"
 
 const About = () => {
   return (

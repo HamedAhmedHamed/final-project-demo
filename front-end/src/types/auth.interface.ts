@@ -1,5 +1,3 @@
-import { type AxiosResponse } from "axios";
-
 export enum Roles {
   user = "user",
   admin = "admin",
@@ -28,21 +26,23 @@ export interface ValidationError {
   status: number;
 }
 
+export interface RegisteredUser {
+  name: User["name"];
+  role: Roles.user | Roles.admin;
+  email: User["email"];
+  password: string;
+  password_confirmation: string; 
+}
+
 export interface AuthContext {
   user: User;
   errors: ValidationError["response"]["data"]["errors"] | null;
   isLoading: boolean;
 
-  csrf: () => Promise<AxiosResponse>;
+  csrf: () => Promise<void>;
   getAccessToken: () => string;
   getUser: () => Promise<void>;
   login: ({ ...credentials }: { email: string; password: string }) => Promise<void>;
-  register: ({ ...credentials }: {
-    name: string;
-    role: Roles.user | Roles.admin;
-    email: string;
-    password: string;
-    password_confirmation: string;
-  }) => Promise<void>;
+  register: ({ ...credentials }: RegisteredUser) => Promise<void>;
   logout: () => Promise<void>;
 }
