@@ -1,5 +1,8 @@
 # Bistro Bliss Booking CRUD Application
 
+> [!WARNING]
+> Please consider running this project from the **typscript** branch.
+
 ## Brief Description
 this application was built using React & Laravel. It's a restaurant booking App. users are identified as Roles: **guest**, **user**, **admin**.
 
