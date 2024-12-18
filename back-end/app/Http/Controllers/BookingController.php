@@ -14,10 +14,14 @@ class BookingController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $bookings = $user->role === 'admin'
-            ? Booking::all()
-            : Booking::where('id', $user->id)->get();
-
+        // $bookings = $user->role === 'admin'
+        //     ? Booking::all()
+        //     : Booking::where('id', $user->id)->get();
+        if ($user->role === 'admin') {
+            $bookings = Booking::all();
+        } else {
+            $bookings = Booking::where('user_id', $user->id)->get();
+        }
         return response()->json($bookings);
     }
 

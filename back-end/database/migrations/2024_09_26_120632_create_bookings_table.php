@@ -17,7 +17,7 @@ return new class extends Migration
             $table->time("registration_time");
             $table->string("name");
             $table->enum("status", ["accepted", "pending", "rejected"])->default("pending");
-            $table->string("phone");
+            $table->string("phone")->unique();
             $table->string("number_of_persons");
             $table->timestamps();
         });
