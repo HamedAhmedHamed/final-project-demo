@@ -8,11 +8,7 @@ const LoginForm = () => {
     password: ""
   })
 
-<<<<<<< HEAD:front-end/src/components/forms/login/LoginForm.tsx
   const { isLoading, login } = useAuthContext()
-=======
-  const { errors, isLoading, login } = useAuthContext()
->>>>>>> bdc8ba608b140c27cb1e1ed73e06234b43c31014:front-end/src/components/sections/LoginForm.jsx
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -43,9 +39,9 @@ const LoginForm = () => {
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
           />
 
-          {errors.email && errors.email.map((e, index) => (
+          {/* {errors.email && errors.email.map((e, index) => (
             <p key={index} className="text-lg text-rose-700 py-1 ml-1">{e}</p>
-          ))}
+          ))} */}
         </div>
 
         <div className="flex flex-col w-full max-md:w-full">
@@ -60,9 +56,9 @@ const LoginForm = () => {
             className='px-6 py-5 mt-2 text-start text-lg w-full border border-solid border-stone-300 rounded-[72px]'
           />
 
-          {errors.password && errors.password.map((e, index) => (
+          {/* {errors.password && errors.password.map((e, index) => (
             <p key={index} className="text-lg text-rose-700 py-1 ml-1">{e}</p>
-          ))}
+          ))} */}
         </div>
 
         <button

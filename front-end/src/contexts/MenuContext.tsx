@@ -43,11 +43,11 @@ export interface MenuItem {
 export const MenuProvider = ({ children }: PropsWithChildren) => {
   const [menuItems, setMenuItems] = useState<MenuItem[] | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { csrf, getAccessToken } = useAuthContext()
+  const { getAccessToken } = useAuthContext()
 
   const fetchMenu = async () => {
     setIsLoading(() => true)
-    await csrf()
+    // await csrf()
     try {
       const { data } = await api.get<MenuItem[]>("/api/menu")
       setMenuItems(() => data)
@@ -61,7 +61,7 @@ export const MenuProvider = ({ children }: PropsWithChildren) => {
 
   const createMenuItem = async ({ ...menuItem }) => {
     setIsLoading(() => true)
-    await csrf()
+    // await csrf()
     try {
       const { data } = await api.post<MenuItem>("/api/menu/store", menuItem, {
         headers: {

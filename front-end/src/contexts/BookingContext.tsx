@@ -9,11 +9,11 @@ const BookingContext = createContext<BookingContext | null>(null)
 export const BookingProvider = ({ children }: PropsWithChildren) => {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false)
-  const { csrf, getAccessToken } = useAuthContext()
+  const { getAccessToken } = useAuthContext()
 
   const fetchBookings = async () => {
     setIsGlobalLoading(() => true)
-    await csrf()
+    // await csrf()
     try {
       const { data } = await api.get<Booking[]>("/api/bookings", {
         headers: {
@@ -33,7 +33,7 @@ export const BookingProvider = ({ children }: PropsWithChildren) => {
 
   const handleConfirmation = async (id: Booking["id"], statusRef: ({ current: Booking["status"] })) => {
     setIsGlobalLoading(() => true)
-    await csrf()
+    // await csrf()
 
     try {
       await api.put(`/api/bookings/confirm/${id}`, { status: statusRef.current }, {

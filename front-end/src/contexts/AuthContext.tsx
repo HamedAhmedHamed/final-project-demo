@@ -6,6 +6,10 @@ import { type AuthContext, User, Roles, type ValidationError } from "../types/au
 const AuthContext = createContext<AuthContext | null>(null)
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [errors, setErrors] = useState<ValidationError["response"]["data"]["errors"] | null>(null)
+  const navigate = useNavigate()
+
   const [user, setUser] = useState<User>({
     id: NaN,
     name: "",
@@ -15,9 +19,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     updated_at: "",
     role: Roles.guest
   })
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [errors, setErrors] = useState<ValidationError["response"]["data"]["errors"] | null>(null)
-  const navigate = useNavigate()
 
   const csrf = async () => {
     try {
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const getUser = async () => {
     setIsLoading(true)
-    await csrf()
+    // await csrf()
     try {
       const { data } = await api.get("/api/user", {
         headers: {
@@ -89,7 +90,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const logout = async () => {
     setIsLoading(true)
-    await csrf()
+    // await csrf()
     try {
       await api.post("/logout", {
         headers: {

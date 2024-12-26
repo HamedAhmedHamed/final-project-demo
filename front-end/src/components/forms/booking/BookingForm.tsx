@@ -29,7 +29,7 @@ const BookingForm = () => {
   const handleBooking = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(() => true)
-    await csrf()
+    // await csrf()
     try {
       const { data } = await api.post<Booking>("/api/bookings/store", {
         "registration_date": booking.registration_date,

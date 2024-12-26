@@ -1,8 +1,5 @@
 # Bistro Bliss Booking CRUD Application
 
-> [!WARNING]
-> Please consider running this project from the **typscript** branch.
-
 ## Brief Description
 this application was built using React & Laravel. It's a restaurant booking App. users are identified as Roles: **guest**, **user**, **admin**.
 
@@ -55,6 +52,10 @@ Go to the back-end directory to install the dependencies:
 ```php
 composer install
 ```
+First, generate Laravel Encription Key:
+```php
+php artisan key:generate
+```
 
 To the run the Backend App:
 ```php
@@ -63,6 +64,16 @@ php artisan serve
 Finally, go back to the fron-end to run the React App:
 ```npm
 npm run preview
+```
+
+Don't forget to adjust the .env file
+- first, copy the .env.example
+- change it to .env
+- change these fields into:
+```env
+FRONTEND_URL=client_app #e.g. http://localhost:5173
+SESSION_DOMAIN=localhost
+SANCTUM_STATEFUL_DOMAINS=local:5173
 ```
 
 If you you want to seed the database:
